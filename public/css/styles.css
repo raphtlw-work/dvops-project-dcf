@@ -1,0 +1,428 @@
+/* fonts */
+@import url(https://fonts.googleapis.com/css?family=Mountains+of+Christmas:700);
+@import url(https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap);
+
+/* utils */
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+.flex-row {
+  flex-direction: row;
+}
+.flex-col {
+  flex-direction: column;
+}
+.hidden {
+  display: none !important;
+}
+.h-100vh {
+  min-height: 100vh !important;
+}
+
+/* body */
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  background-color: #212121;
+  color: white;
+  padding: 0.6rem;
+}
+.header .flipping {
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+}
+.header .flipping div {
+  display: flex;
+  flex-direction: row;
+  gap: 0.1rem;
+}
+.header .flipping .title {
+  font-size: 0.6rem;
+}
+.hero {
+  align-items: center;
+  justify-content: center;
+}
+.hero h1 {
+  font-size: 1.7rem;
+}
+.hero svg {
+  scale: 0.8;
+}
+main {
+  align-items: center;
+  justify-content: center;
+  min-height: 50%;
+}
+.last-flips img {
+  width: 20px;
+  height: 20px;
+}
+
+.auth-box {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow:
+    0px 4px 12px rgba(50, 50, 93, 0.1),
+    0px 1px 3px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 380px;
+  text-align: left;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #32325d;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #6b7c93;
+}
+
+button {
+  padding: 0.4rem 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #6772e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease-out,
+    transform 200ms ease-out;
+}
+button:hover {
+  background-color: #5469d4;
+}
+button:active {
+  transform: scale(0.96);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ccd0d5;
+  border-radius: 6px;
+  background-color: #fff;
+  font-size: 16px;
+  color: #32325d;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #6772e5;
+  outline: none;
+}
+
+.auth-box button {
+  width: 100%;
+  padding: 12px;
+  background-color: #6772e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.auth-box button:hover {
+  background-color: #5469d4;
+}
+.auth-box p {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #243142;
+}
+.auth-box a {
+  color: #6772e5;
+  text-decoration: none;
+  font-weight: 500;
+}
+.auth-box a:hover {
+  text-decoration: underline;
+}
+.auth-box-suggestion {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  align-items: center;
+}
+
+#back-navigation {
+  padding: 2rem;
+}
+#back-navigation .back-btn {
+  display: flex;
+  gap: 1rem;
+  padding: 0rem 1rem;
+}
+
+/* design */
+.arcade-navbar button {
+  -webkit-appearance: button;
+  appearance: button;
+  border-radius: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  text-transform: none;
+}
+.arcade-navbar .btn {
+  background-color: initial;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  color: #212529;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 0.375rem 0.75rem;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  -webkit-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+}
+.arcade-navbar .btn-dark {
+  background-color: #212529;
+  border-color: #212529;
+  color: #fff;
+}
+.arcade-navbar .rounded-pill {
+  border-radius: 50rem !important;
+}
+.arcade-navbar button:not(:disabled) {
+  cursor: pointer;
+}
+.dark .arcade-navbar .btn-dark {
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+  color: #000;
+}
+
+.arcade-navbar .fa-solid {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-feature-settings: normal;
+  font-feature-settings: normal;
+  display: inline-block;
+  display: var(--fa-display, inline-block);
+  font-family: Font Awesome\6 Free;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-rendering: auto;
+}
+.arcade-navbar .fa-xs {
+  height: 16px;
+}
+.arcade-navbar .fa-solid {
+  font-weight: 900;
+}
+.arcade-navbar .fa-gamepad {
+  -webkit-filter: invert(1);
+  filter: invert(1);
+  vertical-align: -3px;
+}
+.dark .arcade-navbar .fa-gamepad {
+  -webkit-filter: invert(0) !important;
+  filter: invert(0) !important;
+}
+.dark .arcade-navbar .fa-times {
+  -webkit-filter: invert(1) !important;
+  filter: invert(1) !important;
+}
+.dark-black .arcade-navbar .fa-gamepad {
+  -webkit-filter: invert(0) !important;
+  filter: invert(0) !important;
+}
+.dark-black .arcade-navbar .fa-times {
+  -webkit-filter: invert(1) !important;
+  filter: invert(1) !important;
+}
+.arcade-navbar .me-2 {
+  margin-right: 0.5rem !important;
+}
+
+.arcade-navbar .fa-gamepad:before {
+  content: "\f11b";
+}
+
+.arcade-navbar .border {
+  border: 1px solid #dee2e6 !important;
+}
+.arcade-navbar .rounded-3 {
+  border-radius: 0.3rem !important;
+}
+.arcade-navbar .px-4 {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+.arcade-navbar .pt-3 {
+  padding-top: 1rem !important;
+}
+.arcade-navbar .pb-4 {
+  padding-bottom: 1.5rem !important;
+}
+.arcade-navbar h5 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-top: 0;
+}
+.arcade-navbar .card-title,
+.arcade-navbar h5 {
+  margin-bottom: 0.5rem;
+}
+.arcade-navbar .text-center {
+  text-align: center !important;
+}
+.arcade-navbar a {
+  color: #fff;
+}
+.arcade-navbar a:hover {
+  color: #0a58ca;
+}
+.arcade-navbar .w-100 {
+  width: 100% !important;
+}
+.arcade-navbar .mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+.arcade-navbar .games-button {
+  transition:
+    box-shadow 0.25s linear,
+    -webkit-transform 0.35s ease-in-out;
+  transition:
+    transform 0.35s ease-in-out,
+    box-shadow 0.25s linear;
+  transition:
+    transform 0.35s ease-in-out,
+    box-shadow 0.25s linear,
+    -webkit-transform 0.35s ease-in-out;
+}
+.arcade-navbar .games-button:hover {
+  box-shadow:
+    0 7px 14px rgba(50, 50, 93, 0.1),
+    0 3px 6px rgba(0, 0, 0, 0.08);
+  -webkit-transform: scale(1.05);
+  transform: scale(1.05);
+}
+.arcade-navbar .dark .games-button:hover {
+  box-shadow:
+    0 7px 14px hsla(0, 0%, 100%, 0.1),
+    0 3px 6px hsla(0, 0%, 100%, 0.08) !important;
+}
+.d-none {
+  display: none !important;
+}
+@media (min-width: 576px) {
+  .d-sm-inline-flex {
+    display: inline-flex !important;
+  }
+  .me-sm-2 {
+    margin-right: 0.5rem !important;
+  }
+}
+@font-face {
+  font-family: Pixel;
+  src:
+    local("Pixel"),
+    url(/fonts/FreePixel.ttf) format("truetype");
+}
+@font-face {
+  font-family: Bagor;
+  font-style: normal;
+  font-weight: 400;
+  src: url(/fonts/Bagor-RoundNormal.otf) format("opentype");
+}
+@font-face {
+  font-family: Inndam;
+  font-style: normal;
+  font-weight: 400;
+  src: url(/fonts/Inndam-Bold.otf) format("opentype");
+}
+@font-face {
+  font-family: Recoleta;
+  src:
+    local("Recoleta"),
+    url(/fonts/Recoleta-Medium.ttf) format("truetype");
+}
+body,
+html {
+  background-color: #f5f5f5;
+  font-family: Pixel;
+  height: 100vh !important;
+  min-height: 100%;
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+}
+.bg-image {
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+}
+#x {
+  background: transparent;
+  border: none;
+  border-radius: 1em;
+  color: #fff;
+  position: absolute;
+  right: -24px;
+  top: -24px;
+}
+.dark {
+  background-color: #0f172a;
+}
+.dark,
+.dark-black {
+  color: #fff;
+  min-height: 100vh;
+}
+.dark-black {
+  background-color: #000;
+}
+.dark-color {
+  background-color: #0f172a;
+  border-color: #fff;
+  color: #fff;
+}
+.dark .dropdown-menu {
+  background-color: #1e293b;
+  border: 1px solid #000;
+  color: #fff;
+}
+.dark-black .dropdown-menu {
+  background-color: #000;
+  border: 1px solid #fff;
+  color: #fff;
+}
+.dark-color .card {
+  background-color: #0f172a;
+  color: #fff;
+}
