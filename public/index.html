@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Coin Flip Game</title>
 
     <link rel="stylesheet" href="css/normalize.css" />
@@ -116,7 +117,12 @@
     <main class="flex flex-col" id="view-login">
       <div class="auth-box flex flex-col">
         <h2>Sign in to your account</h2>
-        <form action="/login" method="post" class="flex flex-col">
+        <form
+          action="/login"
+          onsubmit="return validateSignin()"
+          method="post"
+          class="flex flex-col"
+        >
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required />
 
@@ -135,7 +141,12 @@
     <main class="flex flex-col" id="view-register">
       <div class="auth-box flex flex-col">
         <h2>Create an account</h2>
-        <form action="/register" method="post" class="flex flex-col">
+        <form
+          action="/register"
+          onsubmit="return validateRegister()"
+          method="post"
+          class="flex flex-col"
+        >
           <label for="username">Username</label>
           <input type="text" id="username" name="username" required />
 
@@ -154,11 +165,11 @@
           />
 
           <button type="submit">Sign Up</button>
-          <p>
-            Already have an account?
-            <a href="#" onclick="pushView('login')">Sign in</a>
-          </p>
         </form>
+        <p>
+          Already have an account?
+          <a href="#" onclick="pushView('login')">Sign in</a>
+        </p>
       </div>
     </main>
 
