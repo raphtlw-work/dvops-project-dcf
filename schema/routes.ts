@@ -15,8 +15,8 @@ export const errorSchema = z.object({
 export type Error = z.infer<typeof errorSchema>
 
 export const authRegisterInput = z.object({
-  name: z.string(),
   email: z.string().email(),
+  username: z.string(),
   password: z.string(),
 })
 

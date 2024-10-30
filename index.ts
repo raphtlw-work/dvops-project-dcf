@@ -21,8 +21,8 @@ authRouter.post("/register", async (req, res) => {
     const user = authRegisterInput.parse(req.body)
     const hashedPassword = await bcrypt.hash(user.password, 10)
     await db.insert(usersTable).values({
-      name: user.name,
       email: user.email,
+      username: user.username,
       password: hashedPassword,
     })
   } catch (e) {
