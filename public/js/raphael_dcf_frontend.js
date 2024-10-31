@@ -113,3 +113,15 @@ function validateRegister() {
   // If all validations pass
   return true
 }
+
+const SECONDS = 1000
+const LIVERELOAD_INTERVAL = 0.5 * SECONDS
+const livereload = setInterval(() => {
+  fetch("/livereload")
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.reload) {
+        window.location.reload()
+      }
+    })
+}, LIVERELOAD_INTERVAL)

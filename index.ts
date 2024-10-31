@@ -14,6 +14,14 @@ app.get("/", (req, res) => {
   res.send("Hello, World")
 })
 
+if (process.env.NODE_ENV === "development") {
+  let toReload = true
+  app.get("/livereload", (req, res) => {
+    res.json({ reload: toReload })
+    toReload = false
+  })
+}
+
 const authRouter = express.Router()
 
 authRouter.post("/register", async (req, res) => {
