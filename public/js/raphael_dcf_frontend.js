@@ -36,8 +36,8 @@ function showView(viewName) {
 
 function validateSignin() {
   // Get form inputs
-  const email = document.getElementById("email").value
-  const password = document.getElementById("password").value
+  const email = document.getElementById("login-email").value
+  const password = document.getElementById("login-password").value
 
   // Regular expression for a valid email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -68,10 +68,10 @@ function validateSignin() {
 
 function validateRegister() {
   // Get form inputs
-  const username = document.getElementById("username").value
-  const email = document.getElementById("email").value
-  const password = document.getElementById("password").value
-  const confirmPassword = document.getElementById("confirm-password").value
+  const username = document.getElementById("register-username").value
+  const email = document.getElementById("register-email").value
+  const password = document.getElementById("register-password").value
+  const confirmPassword = document.getElementById("register-confirm-password").value
 
   // Username validation: At least 3 characters and alphanumeric
   const usernameRegex = /^[a-zA-Z0-9]{3,}$/

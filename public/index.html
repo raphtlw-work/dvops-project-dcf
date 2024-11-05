@@ -118,16 +118,16 @@
       <div class="auth-box flex flex-col">
         <h2>Sign in to your account</h2>
         <form
-          action="/login"
+          action="/auth/login"
           onsubmit="return validateSignin()"
           method="post"
           class="flex flex-col"
         >
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required />
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" name="email" required />
 
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" required />
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" name="password" required />
 
           <button type="submit">Continue</button>
         </form>
@@ -142,24 +142,24 @@
       <div class="auth-box flex flex-col">
         <h2>Create an account</h2>
         <form
-          action="/register"
+          action="/auth/register"
           onsubmit="return validateRegister()"
           method="post"
           class="flex flex-col"
         >
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" required />
+          <label for="register-username">Username</label>
+          <input type="text" id="register-username" name="username" required />
 
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required />
+          <label for="register-email">Email</label>
+          <input type="email" id="register-email" name="email" required />
 
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" required />
+          <label for="register-password">Password</label>
+          <input type="password" id="register-password" name="password" required />
 
-          <label for="confirm-password">Confirm Password</label>
+          <label for="register-confirm-password">Confirm Password</label>
           <input
             type="password"
-            id="confirm-password"
+            id="register-confirm-password"
             name="confirm_password"
             required
           />
