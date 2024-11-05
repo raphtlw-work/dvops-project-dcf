@@ -49,7 +49,7 @@ window.onload = () => {
         showView('game')
       } else {
         console.log(data.error)
-        alert('Error submitting form')
+        alert('Error submitting form.')
       }
     })
     .catch(error => {
