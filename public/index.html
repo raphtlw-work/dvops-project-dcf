@@ -118,9 +118,7 @@
       <div class="auth-box flex flex-col">
         <h2>Sign in to your account</h2>
         <form
-          action="/auth/login"
-          onsubmit="return validateSignin()"
-          method="post"
+          id="login-form"
           class="flex flex-col"
         >
           <label for="login-email">Email</label>
@@ -142,9 +140,7 @@
       <div class="auth-box flex flex-col">
         <h2>Create an account</h2>
         <form
-          action="/auth/register"
-          onsubmit="return validateRegister()"
-          method="post"
+          id="register-form"
           class="flex flex-col"
         >
           <label for="register-username">Username</label>
