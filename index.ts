@@ -34,6 +34,7 @@ authRouter.post("/register", async (req, res) => {
       username: user.username,
       password: hashedPassword,
     })
+    res.status(200).json({ success: true })
   } catch (e) {
     res.status(500).json({
       success: false,

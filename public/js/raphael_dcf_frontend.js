@@ -46,6 +46,7 @@ window.onload = () => {
     .then(data => {
       if (data.success) {
         alert('Login Success!')
+        window.localStorage.setItem('authToken', data.token)
         showView('game')
       } else {
         console.log(data.error)
