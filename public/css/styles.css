@@ -19,6 +19,9 @@
 .h-100vh {
   min-height: 100vh !important;
 }
+.flex-1 {
+  flex: 1;
+}
 
 /* body */
 .header {
@@ -165,10 +168,10 @@ input[type="password"]:focus {
   align-items: center;
 }
 
-#back-navigation {
+#top-nav {
   padding: 2rem;
 }
-#back-navigation .back-btn {
+#top-nav .back-btn {
   display: flex;
   gap: 1rem;
   padding: 0rem 1rem;

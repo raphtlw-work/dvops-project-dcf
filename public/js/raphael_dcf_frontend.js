@@ -3,6 +3,8 @@ const MAIN_VIEW = "home"
 window.onload = () => {
   showView(MAIN_VIEW)
 
+  document.getElementById('profile-navigation').classList.add('hidden')
+
   document.getElementById('login-form').addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -47,6 +49,7 @@ window.onload = () => {
       if (data.success) {
         alert('Login Success!')
         window.localStorage.setItem('authToken', data.token)
+        document.getElementById('profile-navigation').classList.remove('hidden')
         showView('game')
       } else {
         console.log(data.error)
