@@ -129,6 +129,39 @@ app.get("/user/profile", async (req, res) => {
   }
 })
 
+app.put("/user/profile", async (req, res) => {
+  if (!req.headers.authorization) {
+    res.status(403).json({ error: "No token found" })
+    return
+  }
+
+  const token = req.headers.authorization.split(" ")[1]
+  try {
+    const payload = jwt.verify(token, process.env.JWT_SECRET!) as any
+    const user = payload.user as typeof usersTable.$inferSelect
+    const { username, email } = req.body
+
+    const dbUser = await db
+      .select()
+      .from(usersTable)
+      .where(eq(usersTable.id, user.id))
+
+    if (dbUser.length === 0) {
+      res.status(404).json({ error: "User not found" })
+      return
+    }
+
+    await db
+      .update(usersTable)
+      .set({ username, email })
+      .where(eq(usersTable.id, user.id))
+
+    res.status(200).json({ success: true, username, email })
+  } catch (e) {
+    res.status(401).json({ error: "Invalid token" })
+  }
+})
+
 app.use("/ocean", oceanRouter)
 
 app.listen(process.env.PORT, () => {
