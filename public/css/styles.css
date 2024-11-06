@@ -23,6 +23,10 @@
   flex: 1;
 }
 
+#balance-navigation {
+  margin-right: 1rem;
+}
+
 /* body */
 .header {
   display: flex;
