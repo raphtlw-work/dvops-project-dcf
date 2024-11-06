@@ -198,23 +198,23 @@ function popView() {
 }
 
 function showView(viewName) {
-  document.querySelectorAll("main").forEach((el) => el.classList.add("hidden"));
-  document.getElementById(`view-${viewName}`).classList.remove("hidden");
+  document.querySelectorAll("main").forEach((el) => el.classList.add("hidden"))
+  document.getElementById(`view-${viewName}`).classList.remove("hidden")
 
   if (viewName !== MAIN_VIEW) {
     document
       .querySelector("#back-navigation .back-btn")
-      .classList.remove("hidden");
+      .classList.remove("hidden")
   } else {
-    viewStack = [MAIN_VIEW];
-    document.querySelector("#back-navigation .back-btn").classList.add("hidden");
+    viewStack = [MAIN_VIEW]
+    document.querySelector("#back-navigation .back-btn").classList.add("hidden")
     if (!window.localStorage.getItem("authToken")) {
-      document.getElementById("balance-navigation").classList.remove("hidden");
+      document.getElementById("balance-navigation").classList.remove("hidden")
     }
   }
 
   if (viewName === "creditmachine" || viewName === "profile") {
-    document.getElementById("balance-navigation").classList.add("hidden");
+    document.getElementById("balance-navigation").classList.add("hidden")
   }
 }
 
@@ -250,26 +250,27 @@ const livereload = setInterval(() => {
       }
     })
 }, LIVERELOAD_INTERVAL)
+
 function editProfile() {
-  const usernameElement = document.getElementById("profile-username");
-  const emailElement = document.getElementById("profile-email");
+  const usernameElement = document.getElementById("profile-username")
+  const emailElement = document.getElementById("profile-email")
 
-  const currentUsername = usernameElement.textContent;
-  const currentEmail = emailElement.textContent;
+  const currentUsername = usernameElement.textContent
+  const currentEmail = emailElement.textContent
 
-  usernameElement.innerHTML = `<input type="text" id="edit-username" value="${currentUsername}" />`;
-  emailElement.innerHTML = `<input type="email" id="edit-email" value="${currentEmail}" />`;
+  usernameElement.innerHTML = `<input type="text" id="edit-username" value="${currentUsername}" />`
+  emailElement.innerHTML = `<input type="email" id="edit-email" value="${currentEmail}" />`
 
-  const editButton = document.querySelector("#view-profile button");
-  editButton.textContent = "Save";
-  editButton.onclick = saveProfile;
+  const editButton = document.querySelector("#view-profile button")
+  editButton.textContent = "Save"
+  editButton.onclick = saveProfile
 }
 
 function saveProfile() {
-  const newUsername = document.getElementById("edit-username").value;
-  const newEmail = document.getElementById("edit-email").value;
+  const newUsername = document.getElementById("edit-username").value
+  const newEmail = document.getElementById("edit-email").value
 
-  const token = window.localStorage.getItem("authToken");
+  const token = window.localStorage.getItem("authToken")
 
   fetch("/user/profile", {
     method: "PUT",
@@ -285,19 +286,19 @@ function saveProfile() {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        document.getElementById("profile-username").textContent = data.username;
-        document.getElementById("profile-email").textContent = data.email;
+        document.getElementById("profile-username").textContent = data.username
+        document.getElementById("profile-email").textContent = data.email
 
-        const editButton = document.querySelector("#view-profile button");
-        editButton.textContent = "Edit";
-        editButton.onclick = editProfile;
+        const editButton = document.querySelector("#view-profile button")
+        editButton.textContent = "Edit"
+        editButton.onclick = editProfile
       } else {
-        console.log(data.error);
-        alert("Error updating profile.");
+        console.log(data.error)
+        alert("Error updating profile.")
       }
     })
     .catch((error) => {
-      console.error("Error updating profile:", error);
-      alert("Error updating profile.");
-    });
+      console.error("Error updating profile:", error)
+      alert("Error updating profile.")
+    })
 }

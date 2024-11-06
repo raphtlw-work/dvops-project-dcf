@@ -25,6 +25,9 @@
 
 #balance-navigation {
   margin-right: 1rem;
+  bottom: 0.5rem;
+  left: 1.5rem;
+  position: fixed;
 }
 
 #profile-navigation {
@@ -388,7 +391,8 @@ input[type="password"]:focus {
     local("Recoleta"),
     url(/fonts/Recoleta-Medium.ttf) format("truetype");
 }
-body, html {
+body,
+html {
   background-color: #f5f5f5;
   font-family: Pixel;
   height: 100% !important;

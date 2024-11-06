@@ -47,20 +47,17 @@
           </button>
         </div>
         <div>
-          <button
-            onclick="showView('creditmachine');"
-            class="back-btn"
-          >
+          <button onclick="showView('creditmachine');" class="back-btn">
             <i class="fa-solid fa-star"></i>
             <p>Credit Machine</p>
           </button>
         </div>
       </div>
+    </div>
 
-      <div class="flex flex-col" id="balance-navigation">
-        <div>
-          <p>Current balance: <span id="user-balance">Loading</span></p>
-        </div>
+    <div class="flex flex-col" id="balance-navigation">
+      <div>
+        <p>Current balance: <span id="user-balance">Loading</span></p>
       </div>
     </div>
 
@@ -149,7 +146,7 @@
         <h2>Tap to earn credits!</h2>
         <div class="flex-container">
           <div class="image-button" onclick="toggleSize(this); earnCredits();">
-            <img src="logo.png" alt="Click to enlarge">
+            <img src="logo.png" alt="Click to enlarge" />
           </div>
         </div>
       </div>
@@ -212,8 +209,12 @@
     <main class="flex flex-col hidden" id="view-profile">
       <div class="auth-box flex flex-col">
         <h2>Your Profile</h2>
-        <p class="profile-info">Username: <span id="profile-username">Loading...</span></p>
-        <p class="profile-info">Email: <span id="profile-email">Loading...</span></p>
+        <p class="profile-info">
+          Username: <span id="profile-username">Loading...</span>
+        </p>
+        <p class="profile-info">
+          Email: <span id="profile-email">Loading...</span>
+        </p>
         <button onclick="editProfile();">Edit</button>
       </div>
     </main>
@@ -296,37 +297,37 @@
       // JavaScript to toggle the image size with automatic reset after enlarging
       function toggleSize(element) {
         // Enlarge the image
-        element.classList.add('enlarged');
+        element.classList.add("enlarged")
 
         // After 100ms, reset to the default size
         setTimeout(() => {
-          element.classList.remove('enlarged');
-        }, 100); // Adjust the delay to your preference (100ms here)
+          element.classList.remove("enlarged")
+        }, 100) // Adjust the delay to your preference (100ms here)
 
         // Create "+1" text that appears randomly on the screen
-        createPlusOneText();
+        createPlusOneText()
       }
 
       // Function to create "+1" text randomly
       function createPlusOneText() {
-        const plusOne = document.createElement("div");
-        plusOne.innerText = "+1";
-        plusOne.classList.add("plus-one");
+        const plusOne = document.createElement("div")
+        plusOne.innerText = "+1"
+        plusOne.classList.add("plus-one")
 
         // Random position for the "+1" text
-        const randomX = Math.floor(Math.random() * window.innerWidth) - 50; // Random X position
-        const randomY = Math.floor(Math.random() * window.innerHeight) - 50; // Random Y position
+        const randomX = Math.floor(Math.random() * window.innerWidth) - 50 // Random X position
+        const randomY = Math.floor(Math.random() * window.innerHeight) - 50 // Random Y position
 
-        plusOne.style.left = randomX + 'px';
-        plusOne.style.top = randomY + 'px';
+        plusOne.style.left = randomX + "px"
+        plusOne.style.top = randomY + "px"
 
         // Append the "+1" to the body
-        document.body.appendChild(plusOne);
+        document.body.appendChild(plusOne)
 
         // Remove the "+1" after 1 second (fade out effect)
         setTimeout(() => {
-          plusOne.remove();
-        }, 1000); // Adjust the timing for how long the "+1" stays
+          plusOne.remove()
+        }, 1000) // Adjust the timing for how long the "+1" stays
       }
     </script>
 
