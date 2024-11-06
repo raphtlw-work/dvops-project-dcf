@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
-  const balanceElement = document.getElementById("userbalance");
-  balanceElement.innerText = "loading...";
+  const balanceElement = document.getElementById("userbalance")
+  balanceElement.innerText = "loading..."
 
   try {
     const response = await fetch("/user/balance", {
@@ -9,49 +9,52 @@ document.addEventListener("DOMContentLoaded", async function () {
         Authorization: `Bearer ${window.localStorage.getItem("authToken")}`,
         "Content-Type": "application/json",
       },
-    });
+    })
 
     if (!response.ok) {
-      const errorData = await response.json();
-      balanceElement.innerText = `Error: ${errorData.error}`;
-      return;
+      const errorData = await response.json()
+      balanceElement.innerText = `Error: ${errorData.error}`
+      return
     }
 
-    const data = await response.json();
-    balanceElement.innerText = data.balance;
+    const data = await response.json()
+    balanceElement.innerText = data.balance
   } catch (error) {
-    console.error("Error fetching balance:", error);
-    balanceElement.innerText = "Failed to fetch balance. Please try again.";
+    console.error("Error fetching balance:", error)
+    balanceElement.innerText = "Failed to fetch balance. Please try again."
   }
-});
+})
 
 function earnCredits() {
   let currentBalance =
-    parseInt(document.getElementById("userbalance").textContent) || 0;
+    parseInt(document.getElementById("userbalance").textContent) || 0
 
-  currentBalance += 1;
+  currentBalance += 1
 
-  document.getElementById("userbalance").textContent = currentBalance;
+  document.getElementById("userbalance").textContent = currentBalance
 
-  const userId = 123; // Example user ID, replace with actual logic to get the logged-in user ID
+  const token = window.localStorage.getItem("authToken")
 
-  fetch(`/balance?userId=${userId}&newBalance=${currentBalance}`, {
+  fetch(`/ocean/balance`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       balance: currentBalance,
     }),
   })
-    .then((response) => {
+    .then(async (response) => {
       if (response.ok) {
-        console.log("Balance updated successfully.");
+        const body = await response.json()
+        console.log("Balance updated successfully.")
+        document.getElementById("user-balance").innerText = body.balance
       } else {
-        console.error("Failed to update balance.");
+        console.error("Failed to update balance.")
       }
     })
     .catch((error) => {
-      console.error("Error updating balance:", error);
-    });
+      console.error("Error updating balance:", error)
+    })
 }

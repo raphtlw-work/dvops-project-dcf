@@ -1,6 +1,7 @@
 // Assuming you already have express and db imported
 import { eq } from "drizzle-orm"
 import express from "express"
+import jwt from "jsonwebtoken"
 import { usersTable } from "../schema/db.js" // Your users table schema
 import { db } from "./db.js" // Your Drizzle ORM instance
 
@@ -8,11 +9,26 @@ export const oceanRouter = express.Router()
 
 // Route to update user balance
 oceanRouter.post("/balance", async (req, res) => {
-  const { userId, balance } = req.body
+  const { balance } = req.body
 
-  // Check if userId and balance are provided
-  if (!userId || typeof balance !== "string") {
-    res.status(400).json({ error: "Invalid userId or balance" })
+  if (!req.headers.authorization) {
+    res.status(403).json({ error: "No token found" })
+    return
+  }
+
+  const token = req.headers.authorization.split(" ")[1]
+  const payload = jwt.verify(token, process.env.JWT_SECRET!) as any
+  const user = payload.user as typeof usersTable.$inferSelect
+  const dbUser = await db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.id, user.id))
+
+  console.log(user)
+  console.log(dbUser)
+
+  if (dbUser.length === 0) {
+    res.status(404).json({ error: "User not found" })
     return
   }
 
@@ -21,7 +37,7 @@ oceanRouter.post("/balance", async (req, res) => {
     const updatedUser = await db
       .update(usersTable)
       .set({ balance }) // Set the new balance
-      .where(eq(usersTable.id, userId)) // Find the user by ID
+      .where(eq(usersTable.id, dbUser[0].id)) // Find the user by ID
       .execute()
 
     if (updatedUser.rowCount === 0) {
@@ -30,10 +46,7 @@ oceanRouter.post("/balance", async (req, res) => {
     }
 
     // Return the updated balance
-    res.json({
-      userId,
-      balance,
-    })
+    res.json({ balance })
     return
   } catch (err) {
     console.error("Error updating balance:", err)

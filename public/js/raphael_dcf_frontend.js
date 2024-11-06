@@ -8,8 +8,10 @@ window.onload = () => {
 
   const token = window.localStorage.getItem("authToken")
   if (token) {
-    console.log(token)
+    document.getElementById("profile-navigation").classList.remove("hidden")
+    document.getElementById("balance-navigation").classList.remove("hidden")
     fetchUserBalance(token)
+    showView("game")
   }
 
   document.getElementById("login-form").addEventListener("submit", (event) => {
@@ -163,6 +165,10 @@ function pushView(name) {
 }
 
 function popView() {
+  if (viewStack[viewStack.length - 1] !== "creditmachine") {
+    document.getElementById("balance-navigation").classList.remove("hidden")
+  }
+
   const viewName = viewStack.pop()
 
   showView(viewName)
@@ -179,6 +185,13 @@ function showView(viewName) {
   } else {
     viewStack = [MAIN_VIEW]
     document.querySelector("#back-navigation .back-btn").classList.add("hidden")
+    if (!window.localStorage.getItem("authToken")) {
+      document.getElementById("balance-navigation").classList.remove("hidden")
+    }
+  }
+
+  if (viewName === "creditmachine") {
+    document.getElementById("balance-navigation").classList.add("hidden")
   }
 }
 

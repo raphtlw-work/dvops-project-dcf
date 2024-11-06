@@ -13,13 +13,20 @@ gameRouter.post("/flip", async (req, res) => {
   }
 
   const token = req.headers.authorization.split(" ")[1]
-  const payload = jwt.verify(token, process.env.JWT_SECRET!) as string
-
-  const user = JSON.parse(payload)
+  const payload = jwt.verify(token, process.env.JWT_SECRET!) as any
+  const user = payload.user as typeof usersTable.$inferSelect
   const dbUser = await db
     .select()
     .from(usersTable)
     .where(eq(usersTable.id, user.id))
+
+  console.log(user)
+  console.log(dbUser)
+
+  if (dbUser.length === 0) {
+    res.status(404).json({ error: "User not found" })
+    return
+  }
 
   const amount = req.body.amount
 
