@@ -159,8 +159,13 @@ input[type="password"]:focus {
 .auth-box p {
   margin-top: 20px;
   text-align: center;
-  font-size: 14px;
+  font-size: 18px; /* Increased font size */
   color: #243142;
+}
+
+.auth-box .profile-info {
+  font-size: 20px; /* Increased font size for profile info */
+  margin-bottom: 10px;
 }
 .auth-box a {
   color: #6772e5;

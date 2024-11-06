@@ -250,3 +250,32 @@ const livereload = setInterval(() => {
       }
     })
 }, LIVERELOAD_INTERVAL)
+function editProfile() {
+  const usernameElement = document.getElementById("profile-username");
+  const emailElement = document.getElementById("profile-email");
+
+  const currentUsername = usernameElement.textContent;
+  const currentEmail = emailElement.textContent;
+
+  usernameElement.innerHTML = `<input type="text" id="edit-username" value="${currentUsername}" />`;
+  emailElement.innerHTML = `<input type="email" id="edit-email" value="${currentEmail}" />`;
+
+  const editButton = document.querySelector("#view-profile button");
+  editButton.textContent = "Save";
+  editButton.onclick = saveProfile;
+}
+
+function saveProfile() {
+  const newUsername = document.getElementById("edit-username").value;
+  const newEmail = document.getElementById("edit-email").value;
+
+  // Here you would typically send the updated data to the server
+  // For now, we'll just update the UI
+
+  document.getElementById("profile-username").textContent = newUsername;
+  document.getElementById("profile-email").textContent = newEmail;
+
+  const editButton = document.querySelector("#view-profile button");
+  editButton.textContent = "Edit";
+  editButton.onclick = editProfile;
+}
