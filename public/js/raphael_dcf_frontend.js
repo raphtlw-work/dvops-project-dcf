@@ -3,13 +3,14 @@ const MAIN_VIEW = "home"
 window.onload = () => {
   showView(MAIN_VIEW)
 
-  document.getElementById('profile-navigation').classList.add('hidden')
+  document.getElementById("profile-navigation").classList.add("hidden")
+  document.getElementById("balance-navigation").classList.add("hidden")
 
-  document.getElementById('login-form').addEventListener('submit', (event) => {
-    event.preventDefault();
+  document.getElementById("login-form").addEventListener("submit", (event) => {
+    event.preventDefault()
 
-    const email = document.getElementById('login-email').value
-    const password = document.getElementById('login-password').value
+    const email = document.getElementById("login-email").value
+    const password = document.getElementById("login-password").value
 
     // Regular expression for a valid email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -34,105 +35,114 @@ window.onload = () => {
       return false
     }
 
-    fetch('/auth/login', {
-      method: 'POST',
+    fetch("/auth/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email,
         password,
       }),
     })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        alert('Login Success!')
-        window.localStorage.setItem('authToken', data.token)
-        document.getElementById('profile-navigation').classList.remove('hidden')
-        showView('game')
-      } else {
-        console.log(data.error)
-        alert('Error submitting form.')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          alert("Login Success!")
+          window.localStorage.setItem("authToken", data.token)
+          document
+            .getElementById("profile-navigation")
+            .classList.remove("hidden")
+          document
+            .getElementById("balance-navigation")
+            .classList.remove("hidden")
+          showView("game")
+        } else {
+          console.log(data.error)
+          alert("Error submitting form.")
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error)
+        alert("Error submitting form.")
+      })
+  })
+
+  document
+    .getElementById("register-form")
+    .addEventListener("submit", (event) => {
+      event.preventDefault()
+
+      const username = document.getElementById("register-username").value
+      const email = document.getElementById("register-email").value
+      const password = document.getElementById("register-password").value
+      const confirmPassword = document.getElementById(
+        "register-confirm-password",
+      ).value
+
+      // Username validation: At least 3 characters and alphanumeric
+      const usernameRegex = /^[a-zA-Z0-9]{3,}$/
+      if (!usernameRegex.test(username)) {
+        alert(
+          "Username must be at least 3 characters long and contain only letters and numbers.",
+        )
+        return false
       }
-    })
-    .catch(error => {
-      console.error('Error:', error)
-      alert('Error submitting form.')
-    })
-  });
 
-  document.getElementById('register-form').addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const username = document.getElementById('register-username').value
-    const email = document.getElementById('register-email').value
-    const password = document.getElementById('register-password').value
-    const confirmPassword = document.getElementById('register-confirm-password').value
-
-    // Username validation: At least 3 characters and alphanumeric
-    const usernameRegex = /^[a-zA-Z0-9]{3,}$/
-    if (!usernameRegex.test(username)) {
-      alert(
-        "Username must be at least 3 characters long and contain only letters and numbers.",
-      )
-      return false
-    }
-
-    // Email format validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address.")
-      return false
-    }
-
-    // Password length and complexity validation
-    if (password.length < 8) {
-      alert("Password must be at least 8 characters long.")
-      return false
-    }
-
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
-    if (!passwordRegex.test(password)) {
-      alert(
-        "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.",
-      )
-      return false
-    }
-
-    // Confirm password validation
-    if (password !== confirmPassword) {
-      alert("Passwords do not match. Please re-enter.")
-      return false
-    }
-
-    fetch('/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email,
-        username,
-        password,
-      }),
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        alert('Account created! Please login.')
-        showView('login')
-      } else {
-        console.log(data.error)
-        alert('Error submitting form')
+      // Email format validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address.")
+        return false
       }
+
+      // Password length and complexity validation
+      if (password.length < 8) {
+        alert("Password must be at least 8 characters long.")
+        return false
+      }
+
+      const passwordRegex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+      if (!passwordRegex.test(password)) {
+        alert(
+          "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.",
+        )
+        return false
+      }
+
+      // Confirm password validation
+      if (password !== confirmPassword) {
+        alert("Passwords do not match. Please re-enter.")
+        return false
+      }
+
+      fetch("/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          username,
+          password,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            alert("Account created! Please login.")
+            showView("login")
+          } else {
+            console.log(data.error)
+            alert("Error submitting form")
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error)
+          alert("Error submitting form.")
+        })
     })
-    .catch(error => {
-      console.error('Error:', error)
-      alert('Error submitting form.')
-    })
-  });
 }
 
 let viewStack = [MAIN_VIEW]
