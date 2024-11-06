@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken"
 import { usersTable } from "./schema/db.ts"
 import { authLoginInput, authRegisterInput } from "./schema/routes.ts"
 import { db } from "./util/db.ts"
+import { oceanRouter } from "./util/ocean_dcf_backend.ts"
 import { gameRouter } from "./util/raphael_dcf_backend.ts"
 
 const app = express()
@@ -100,6 +101,8 @@ app.get("/user/balance", async (req, res) => {
     res.status(401).json({ error: "Invalid token" })
   }
 })
+
+app.use("/ocean", oceanRouter)
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`)

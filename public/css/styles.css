@@ -436,3 +436,7 @@ body, html {
   background-color: #0f172a;
   color: #fff;
 }
+
+#profile-navigation {
+  gap: 1rem;
+}

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coin Flip Game</title>
+
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script defer src="lib/fontawesome/js/brands.js"></script>
+    <script defer src="lib/fontawesome/js/solid.js"></script>
+    <script defer src="lib/fontawesome/js/fontawesome.js"></script>
+
+    <script defer src="js/raphael_dcf_frontend.js"></script>
+    <script defer src="js/ocean_dcf_frontend.js"></script>
+
+    <script>
+      // JavaScript to toggle the image size with automatic reset after enlarging
+      function toggleSize(element) {
+        // Enlarge the image
+        element.classList.add('enlarged');
+
+        // After 100ms, reset to the default size
+        setTimeout(() => {
+          element.classList.remove('enlarged');
+        }, 100); // Adjust the delay to your preference (100ms here)
+
+        // Create "+1" text that appears randomly on the screen
+        createPlusOneText();
+      }
+
+      // Function to create "+1" text randomly
+      function createPlusOneText() {
+        const plusOne = document.createElement("div");
+        plusOne.innerText = "+1";
+        plusOne.classList.add("plus-one");
+
+        // Random position for the "+1" text
+        const randomX = Math.floor(Math.random() * window.innerWidth) - 50; // Random X position
+        const randomY = Math.floor(Math.random() * window.innerHeight) - 50; // Random Y position
+
+        plusOne.style.left = randomX + 'px';
+        plusOne.style.top = randomY + 'px';
+
+        // Append the "+1" to the body
+        document.body.appendChild(plusOne);
+
+        // Remove the "+1" after 1 second (fade out effect)
+        setTimeout(() => {
+          plusOne.remove();
+        }, 1000); // Adjust the timing for how long the "+1" stays
+      }
+    </script>
+
+    <style>
+      /* Center the flex container */
+      .flex-container {
+        display: flex;
+        justify-content: center; /* Horizontally centers the content */
+        align-items: center; /* Vertically centers the content */
+        height: 20vh; /* Ensures the container takes full height of the viewport */
+        width: 100%; /* Ensures full width */ /* Background color for contrast (optional) */
+      }
+
+      .image-button {
+        display: inline-block;
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out; /* Smooth transition for resizing */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+      }
+
+      .image-button img {
+        width: 150px; /* Default image size */
+        height: auto;
+      }
+
+      .image-button.enlarged img {
+        transform: scale(1.5); /* Scale image by 1.5x */
+      }
+
+      /* Styling for the "+1" text */
+      .plus-one {
+        position: absolute;
+        font-size: 30px;
+        color: #fff;
+        font-weight: bold;
+        animation: popUp 1s ease-in-out;
+        pointer-events: none; /* So it doesn't block clicks */
+      }
+
+      /* Animation for "+1" text */
+      @keyframes popUp {
+        0% {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(1);
+        }
+      }
+    </style>
+
+  </head>
+  <body class="dark">
+    <div class="header">
+      <div class="flipping">
+        <i class="fa-solid fa-user-group"></i>
+        <div>
+          <span id="currently-flipping">16</span>
+          <span class="title">FLIPPING</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-row" id="top-nav">
+      <div class="flex flex-col" id="back-navigation">
+        <div>
+          <button onclick="window.location.href='index.html';" class="back-btn">
+            <i class="fa-solid fa-chevron-left"></i>
+            <p>Back</p>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex-1"></div>
+      
+      <div class="flex flex-col" id="profile-navigation">
+        <div>
+          <button onclick="showView('profile');" class="back-btn">
+            <i class="fa-solid fa-user"></i>
+            <p>Profile</p>
+          </button>
+        </div>
+        <div>
+          <button onclick="showView('creditmachine');" class="back-btn">
+            <i class="fa-solid fa-star"></i>
+            <p>Credit Machine</p>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <main class="flex flex-col" id="view-creditmachine">
+      <p>Credit Balance = <span id="userbalance">loading</span></p>
+      <div class="flex flex-col">
+        <h2>Tap to earn credits!</h2>
+        <div class="flex-container">
+            <div class="image-button"  onclick="toggleSize(this); earnCredits();">
+              <img src="logo.png" alt="Click to enlarge">
+            </div>
+          </div>
+      </div>
+    </main>
+
+
+  </body>
+</html>
