@@ -1,39 +1,39 @@
+// Assuming you already have express and db imported
 import express from 'express';
-import { db } from './db.js'; // Assuming db is the initialized Drizzle instance
-import { usersTable } from '../schema/db.js'; // Import the usersTable
+import { db } from './db.js';  // Your Drizzle ORM instance
+import { usersTable } from '../schema/db.js'; // Your users table schema
 import { eq } from 'drizzle-orm';
 
 export const oceanRouter = express.Router();
 
-// Route to get user balance
-oceanRouter.get('/balance', async (req, res) => {
-  const userId = parseInt(req.query.userId as any);
+// Route to update user balance
+oceanRouter.post('/balance', async (req, res) => {
+  const { userId, balance } = req.body;
 
-  // Check if userId is provided
-  if (!userId) {
-    return res.status(400).json({ error: 'User ID is required' });
+  // Check if userId and balance are provided
+  if (!userId || typeof balance !== 'number') {
+    return res.status(400).json({ error: 'Invalid userId or balance' });
   }
 
   try {
-    // Query the database to get the user balance based on the userId
-    const user = await db.select().from(usersTable).where(eq(usersTable.id, userId)).limit(1).execute();
+    // Update the user's balance in the database
+    const updatedUser = await db
+      .update(usersTable)
+      .set({ balance })  // Set the new balance
+      .where(eq(usersTable.id, userId))  // Find the user by ID
+      .execute();
 
-    // Check if the user was found
-    if (user.length === 0) {
+    if (updatedUser.count === 0) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    // Extract balance from the user record
-    const { balance } = user[0];
-
-    // Return the balance as a response
+    // Return the updated balance
     return res.json({
       userId,
-      balance: parseFloat(balance), // Ensure the balance is in float format
+      balance,
     });
   } catch (err) {
-    // Handle any potential database errors
-    console.error(err);
-    return res.status(500).json({ error: 'An error occurred while retrieving the balance' });
+    console.error('Error updating balance:', err);
+    return res.status(500).json({ error: 'Failed to update balance' });
   }
 });
