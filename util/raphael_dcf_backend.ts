@@ -21,4 +21,33 @@ gameRouter.post("/flip", async (req, res) => {
     .select()
     .from(usersTable)
     .where(eq(usersTable.id, user.id))
+  const amount = req.body.amount
+
+  if (amount < 0 || amount > 100) {
+    res.status(400).json({ error: "Amount must be between 0 and 100 credits" })
+    return
+  }
+
+  const coinFlipResult = Math.random() < 0.5 ? "win" : "lose"
+  const user = JSON.parse(payload)
+
+  const dbUser = await db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.id, user.id))
+
+  if (dbUser.length === 0) {
+    res.status(404).json({ error: "User not found" })
+    return
+  }
+
+  const currentBalance = dbUser[0].balance
+  const newBalance = coinFlipResult === "win" ? currentBalance + amount : currentBalance - amount
+
+  await db
+    .update(usersTable)
+    .set({ balance: newBalance })
+    .where(eq(usersTable.id, user.id))
+
+  res.status(200).json({ result: coinFlipResult, newBalance })
 })
