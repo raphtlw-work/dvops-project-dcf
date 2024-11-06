@@ -25,3 +25,17 @@ window.onload = async() => {
     }
 }
 
+function earnCredits() {
+  // Simulate earning credits
+  let currentBalance = parseInt(document.getElementById('userbalance').textContent) || 0;
+  currentBalance += 100; // Add 100 credits on tap
+
+  // Update the balance in the UI
+  document.getElementById('userbalance').textContent = currentBalance;
+}
+
+// Simulate initial user balance (this would be fetched from an API in a real app)
+document.addEventListener("DOMContentLoaded", function() {
+  const initialBalance = 500; // For example, we start with 500 credits
+  document.getElementById('userbalance').textContent = initialBalance;
+});
