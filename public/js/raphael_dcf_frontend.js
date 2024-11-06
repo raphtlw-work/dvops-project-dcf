@@ -6,6 +6,11 @@ window.onload = () => {
   document.getElementById("profile-navigation").classList.add("hidden")
   document.getElementById("balance-navigation").classList.add("hidden")
 
+  const token = window.localStorage.getItem("authToken");
+  if (token) {
+    fetchUserBalance(token);
+  }
+
   document.getElementById("login-form").addEventListener("submit", (event) => {
     event.preventDefault()
 
@@ -50,12 +55,9 @@ window.onload = () => {
         if (data.success) {
           alert("Login Success!")
           window.localStorage.setItem("authToken", data.token)
-          document
-            .getElementById("profile-navigation")
-            .classList.remove("hidden")
-          document
-            .getElementById("balance-navigation")
-            .classList.remove("hidden")
+          document.getElementById("profile-navigation").classList.remove("hidden");
+          document.getElementById("balance-navigation").classList.remove("hidden");
+          fetchUserBalance(data.token);
           showView("game")
         } else {
           console.log(data.error)
@@ -175,7 +177,26 @@ function showView(viewName) {
   }
 }
 
-const SECONDS = 1000
+function fetchUserBalance(token) {
+  fetch("/user/balance", {
+    method: "GET",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        document.getElementById("user-balance").textContent = data.balance;
+      } else {
+        console.log(data.error);
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching balance:", error);
+    });
+}
 const LIVERELOAD_INTERVAL = 0.5 * SECONDS
 const livereload = setInterval(() => {
   fetch("/livereload")
