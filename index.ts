@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken"
 import { usersTable } from "./schema/db.ts"
 import { authLoginInput, authRegisterInput } from "./schema/routes.ts"
 import { db } from "./util/db.ts"
+import { gameRouter } from "./util/raphael_dcf_backend.ts"
 
 const app = express()
 
@@ -68,6 +69,7 @@ authRouter.post("/login", async (req, res) => {
 })
 
 app.use("/auth", authRouter)
+app.use("/game", gameRouter)
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`)
