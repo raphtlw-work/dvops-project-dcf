@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Coin Flip Game</title>
+
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script defer src="lib/fontawesome/js/brands.js"></script>
+    <script defer src="lib/fontawesome/js/solid.js"></script>
+    <script defer src="lib/fontawesome/js/fontawesome.js"></script>
+
+    <script defer src="js/raphael_dcf_frontend.js"></script>
+    <script defer src="js/ocean_dcf_frontend.js"></script>
+
+  </head>
+  <body class="dark">
+    <div class="header">
+      <div class="flipping">
+        <i class="fa-solid fa-user-group"></i>
+        <div>
+          <span id="currently-flipping">16</span>
+          <span class="title">FLIPPING</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-row" id="top-nav">
+      <div class="flex flex-col" id="back-navigation">
+        <div>
+          <button onclick="window.location.href='index.html';" class="back-btn">
+            <i class="fa-solid fa-chevron-left"></i>
+            <p>Back</p>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex-1"></div>
+      
+      <div class="flex flex-col" id="profile-navigation">
+        <div>
+          <button onclick="showView('profile');" class="back-btn">
+            <i class="fa-solid fa-user"></i>
+            <p>Profile</p>
+          </button>
+        </div>
+        <div>
+          <button onclick="showView('creditmachine');" class="back-btn">
+            <i class="fa-solid fa-star"></i>
+            <p>Credit Machine</p>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <main class="flex flex-col" id="view-creditmachine">
+      <p>userbalance = <span id="userbalance">loading</span></p>
+      <div class="flex flex-col">
+        <h2>Tap to earn credits!</h2>
+      </div>
+    </main>
+
+  </body>
+</html>
