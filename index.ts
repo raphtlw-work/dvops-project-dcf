@@ -73,30 +73,33 @@ app.use("/game", gameRouter)
 
 app.get("/user/balance", async (req, res) => {
   if (!req.headers.authorization) {
-    res.status(403).json({ error: "No token found" });
-    return;
+    res.status(403).json({ error: "No token found" })
+    return
   }
 
-  const token = req.headers.authorization.split(" ")[1];
+  const token = req.headers.authorization.split(" ")[1]
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET!) as string;
-    const user = JSON.parse(payload);
+    const payload = jwt.verify(token, process.env.JWT_SECRET!) as any
+    const user = payload.user as typeof usersTable.$inferSelect
     const dbUser = await db
       .select()
       .from(usersTable)
-      .where(eq(usersTable.id, user.id));
+      .where(eq(usersTable.id, user.id))
+
+    console.log(user)
+    console.log(dbUser)
 
     if (dbUser.length === 0) {
-      res.status(404).json({ error: "User not found" });
-      return;
+      res.status(404).json({ error: "User not found" })
+      return
     }
 
-    const currentBalance = parseFloat(dbUser[0].balance);
-    res.status(200).json({ success: true, balance: currentBalance });
+    const currentBalance = parseFloat(dbUser[0].balance)
+    res.status(200).json({ success: true, balance: currentBalance })
   } catch (e) {
-    res.status(401).json({ error: "Invalid token" });
+    res.status(401).json({ error: "Invalid token" })
   }
-});
+})
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`)
