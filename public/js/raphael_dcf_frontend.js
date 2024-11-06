@@ -175,23 +175,23 @@ function popView() {
 }
 
 function showView(viewName) {
-  document.querySelectorAll("main").forEach((el) => el.classList.add("hidden"))
-  document.getElementById(`view-${viewName}`).classList.remove("hidden")
+  document.querySelectorAll("main").forEach((el) => el.classList.add("hidden"));
+  document.getElementById(`view-${viewName}`).classList.remove("hidden");
 
   if (viewName !== MAIN_VIEW) {
     document
       .querySelector("#back-navigation .back-btn")
-      .classList.remove("hidden")
+      .classList.remove("hidden");
   } else {
-    viewStack = [MAIN_VIEW]
-    document.querySelector("#back-navigation .back-btn").classList.add("hidden")
+    viewStack = [MAIN_VIEW];
+    document.querySelector("#back-navigation .back-btn").classList.add("hidden");
     if (!window.localStorage.getItem("authToken")) {
-      document.getElementById("balance-navigation").classList.remove("hidden")
+      document.getElementById("balance-navigation").classList.remove("hidden");
     }
   }
 
-  if (viewName === "creditmachine") {
-    document.getElementById("balance-navigation").classList.add("hidden")
+  if (viewName === "creditmachine" || viewName === "profile") {
+    document.getElementById("balance-navigation").classList.add("hidden");
   }
 }
 
