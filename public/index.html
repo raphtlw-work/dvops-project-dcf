@@ -257,17 +257,23 @@
       <h1>this is the game itself</h1>
     </main>
 
-  <main class="flex flex-col" id="view-profile">
-      <div id="profile-page" class="profile-page">
-        <h2>Edit Profile</h2>
-        <form class="profile-form">
-            <input type="text" id="username" placeholder="Username" required />
-            <input type="email" id="email" placeholder="Email" required />
-            <input type="password" id="password" placeholder="Password" required />
-            <button type="submit">Save Changes</button>
-        </form>
-    </div>
-  </main>
+    <main id="view-profile" class="hidden">
+      <h1>Profile</h1>
+      
+      <!-- Username Section -->
+      <p>
+        <strong>Username:</strong> 
+        <span id="profile-username"></span> <!-- This will display the username -->
+      </p>
+    
+      <!-- Email Section -->
+      <p>
+        <strong>Email:</strong> 
+        <span id="profile-email"></span> <!-- This will display the email -->
+      </p>
+    
+      <button id="logout-button">Edit</button>
+    </main>
 
     <!-- Main content -->
     <div class="main-content">
