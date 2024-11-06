@@ -11,6 +11,7 @@ window.onload = () => {
     document.getElementById("profile-navigation").classList.remove("hidden")
     document.getElementById("balance-navigation").classList.remove("hidden")
     fetchUserBalance(token)
+    fetchUserProfile(token)
     showView("game")
   }
 
@@ -151,6 +152,28 @@ window.onload = () => {
           console.error("Error:", error)
           alert("Error submitting form.")
         })
+    })
+}
+
+function fetchUserProfile(token) {
+  fetch("/user/profile", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        document.getElementById("profile-username").textContent = data.username
+        document.getElementById("profile-email").textContent = data.email
+      } else {
+        console.log(data.error)
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching profile:", error)
     })
 }
 
