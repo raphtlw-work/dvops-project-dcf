@@ -12,7 +12,7 @@
     <script defer src="lib/fontawesome/js/brands.js"></script>
     <script defer src="lib/fontawesome/js/solid.js"></script>
     <script defer src="lib/fontawesome/js/fontawesome.js"></script>
-
+    <script defer src="js/aslam_dcf_frontend.js"></script>
     <script defer src="js/raphael_dcf_frontend.js"></script>
     <script defer src="js/ocean_dcf_frontend.js"></script>
   </head>
@@ -290,8 +290,19 @@
           </defs>
         </svg>
       </div>
-
-      <h1>this is the game itself</h1>
+       
+      <h3>Coin Flip Game</h3>
+      <div>
+        <label>
+          <input type="radio" name="choice" value="heads"> Heads
+        </label>
+        <label>
+          <input type="radio" name="choice" value="tails"> Tails
+        </label>
+      </div>
+      <button onclick="flipCoin()">Flip Coin</button>
+      <div id="result"></div>
+      <img id="flip-animation" src="flipping animation.gif" style="display: none;" alt="Flipping Coin Animation">
     </main>
     <script>
       // JavaScript to toggle the image size with automatic reset after enlarging

@@ -7,6 +7,7 @@ import { authLoginInput, authRegisterInput } from "./schema/routes.ts"
 import { db } from "./util/db.ts"
 import { oceanRouter } from "./util/ocean_dcf_backend.ts"
 import { gameRouter } from "./util/raphael_dcf_backend.ts"
+import { aslamRouter } from "./util/aslam_dcf_backend.ts"
 
 const app = express()
 
@@ -163,7 +164,7 @@ app.put("/user/profile", async (req, res) => {
 })
 
 app.use("/ocean", oceanRouter)
-
+app.use("/aslam",aslamRouter)
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`)
 })
