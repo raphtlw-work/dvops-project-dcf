@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a web-based Coin Flip Game where users can register, log in, and play a coin flip game to earn or lose credits. The application is built using a combination of TypeScript, JavaScript, and HTML/CSS, with a backend powered by Express.js and a PostgreSQL database managed through Drizzle ORM.
+This project is a web-based Coin Decider where users can register, log in, and play a coin flip game to earn or lose credits. The application is built using a combination of TypeScript, JavaScript, and HTML/CSS, with a backend powered by Express.js and a PostgreSQL database managed through Drizzle ORM.
 
 ## Website Functionality
 
