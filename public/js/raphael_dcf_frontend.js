@@ -155,28 +155,6 @@ window.onload = () => {
     })
 }
 
-function fetchUserProfile(token) {
-  fetch("/user/profile", {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.success) {
-        document.getElementById("profile-username").textContent = data.username
-        document.getElementById("profile-email").textContent = data.email
-      } else {
-        console.log(data.error)
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching profile:", error)
-    })
-}
-
 let viewStack = [MAIN_VIEW]
 
 function pushView(name) {
