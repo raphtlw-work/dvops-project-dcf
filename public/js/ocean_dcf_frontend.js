@@ -58,3 +58,8 @@ function earnCredits() {
       console.error("Error updating balance:", error)
     })
 }
+
+function playClickSound() {
+  var clickSound = new Audio('coinsound.mp3'); // Path to your sound file
+  clickSound.play();
+}

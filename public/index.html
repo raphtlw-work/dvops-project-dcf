@@ -147,7 +147,10 @@
       <div class="flex flex-col">
         <h2>Tap to earn credits!</h2>
         <div class="flex-container">
-          <div class="image-button" onclick="toggleSize(this); earnCredits();">
+          <div
+            class="image-button"
+            onclick="toggleSize(this); earnCredits(); playClickSound();"
+          >
             <img src="logo.png" alt="Click to enlarge" draggable="false" />
           </div>
         </div>
