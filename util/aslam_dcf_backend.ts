@@ -1,18 +1,17 @@
+import { eq } from "drizzle-orm"
 import express from "express"
 import jwt from "jsonwebtoken"
-import { usersTable, gamesTable } from "../schema/db.js"
+import { gamesTable, usersTable } from "../schema/db.js"
 import { db } from "./db.js"
-import { eq } from "drizzle-orm"
 
 export const aslamRouter = express.Router()
 
-
 // Define the payload type with `user` property
 interface JwtPayloadWithUser extends jwt.JwtPayload {
-    user: {
-      id: number
-    }
+  user: {
+    id: number
   }
+}
 
 // Coin Flip Route
 aslamRouter.post("/coinflip", async (req, res) => {
@@ -24,7 +23,10 @@ aslamRouter.post("/coinflip", async (req, res) => {
   }
 
   const token = req.headers.authorization.split(" ")[1]
-  const payload = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayloadWithUser
+  const payload = jwt.verify(
+    token,
+    process.env.JWT_SECRET!,
+  ) as JwtPayloadWithUser
   const userId = payload.user.id
 
   // Fetch user and balance
@@ -68,13 +70,11 @@ aslamRouter.post("/coinflip", async (req, res) => {
         .set({ balance: newBalance })
         .where(eq(usersTable.id, userId))
 
-      await trx
-        .insert(gamesTable)
-        .values({
-          userId: userId,
-          amount: newBalance,
-          win: win,
-        })
+      await trx.insert(gamesTable).values({
+        userId: userId,
+        amount: newBalance,
+        win: win,
+      })
     })
 
     res.json({ balance: newBalance, message })

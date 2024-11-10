@@ -35,7 +35,7 @@ function earnCredits() {
 
   const token = window.localStorage.getItem("authToken")
 
-  fetch(`/ocean/balance`, {
+  fetch(`/user/balance`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

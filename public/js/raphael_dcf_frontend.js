@@ -1,5 +1,26 @@
 const MAIN_VIEW = "home"
 
+function fetchUserBalance(token) {
+  fetch("/user/balance", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        document.getElementById("user-balance").textContent = data.balance
+      } else {
+        console.log(data.error)
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching balance:", error)
+    })
+}
+
 window.onload = () => {
   showView(MAIN_VIEW)
 
@@ -194,27 +215,6 @@ function showView(viewName) {
   if (viewName === "creditmachine" || viewName === "profile") {
     document.getElementById("balance-navigation").classList.add("hidden")
   }
-}
-
-function fetchUserBalance(token) {
-  fetch("/user/balance", {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.success) {
-        document.getElementById("user-balance").textContent = data.balance
-      } else {
-        console.log(data.error)
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching balance:", error)
-    })
 }
 
 const SECONDS = 1000

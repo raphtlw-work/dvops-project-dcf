@@ -22,7 +22,7 @@ export const usersRelations = relations(usersTable, ({ many }) => ({
 export const gamesTable = pgTable("games", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   userId: integer("user_id"),
-  amount: numeric({ precision: 7, scale: 2 }).notNull().unique(),
+  amount: numeric({ precision: 7, scale: 2 }).notNull(),
   win: boolean(),
 })
 
