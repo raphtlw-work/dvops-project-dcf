@@ -8,7 +8,7 @@ import { db } from "./db.js" // Your Drizzle ORM instance
 export const oceanRouter = express.Router()
 
 // Route to update user balance
-oceanRouter.post("/balance", async (req, res) => {
+oceanRouter.post("/user/balance", async (req, res) => {
   const { balance } = req.body
 
   if (!req.headers.authorization) {

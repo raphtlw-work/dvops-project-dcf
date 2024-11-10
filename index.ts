@@ -4,6 +4,8 @@ import express from "express"
 import jwt from "jsonwebtoken"
 import { usersTable } from "./schema/db.ts"
 import { authLoginInput, authRegisterInput } from "./schema/routes.ts"
+import { aslamRouter } from "./util/aslam_dcf_backend.ts"
+import { chenxinRouter } from "./util/chenxin_dcf_backend.ts"
 import { db } from "./util/db.ts"
 import { oceanRouter } from "./util/ocean_dcf_backend.ts"
 import { gameRouter } from "./util/raphael_dcf_backend.ts"
@@ -102,7 +104,9 @@ app.get("/user/balance", async (req, res) => {
   }
 })
 
-app.use("/ocean", oceanRouter)
+app.use(aslamRouter)
+app.use(oceanRouter)
+app.use(chenxinRouter)
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`)
