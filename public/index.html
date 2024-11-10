@@ -147,11 +147,9 @@
       <div class="flex flex-col">
         <h2>Tap to earn credits!</h2>
         <div class="flex-container">
-          <div
-            class="image-button"
-            onclick="toggleSize(this); earnCredits(); playClickSound();"
-          >
-            <img src="logo.png" alt="Click to enlarge" draggable="false" />
+
+          <div class="image-button" onclick="toggleSize(this); earnCredits(); playClickSound();">
+            <img src="logo.png" alt="Click to enlarge">
           </div>
         </div>
       </div>
@@ -321,81 +319,77 @@
       />
     </main>
     <script>
-      // JavaScript to toggle the image size with automatic reset after enlarging
+
+      let debounceTimer;
+
       function toggleSize(element) {
-        // Enlarge the image
-        element.classList.add("enlarged")
+        if (debounceTimer) {
+          clearTimeout(debounceTimer);
+        }
 
-        // After 100ms, reset to the default size
-        setTimeout(() => {
-          element.classList.remove("enlarged")
-        }, 100) // Adjust the delay to your preference (100ms here)
+        element.classList.add("enlarged");
 
-        // Create "+1" text that appears randomly on the screen
-        createPlusOneText()
+        debounceTimer = setTimeout(() => {
+          element.classList.remove("enlarged");
+        }, 20);
+
+        createPlusOneText();
       }
-
-      // Function to create "+1" text randomly
+      
       function createPlusOneText() {
         const plusOne = document.createElement("div")
         plusOne.innerText = "+1"
         plusOne.classList.add("plus-one")
 
-        // Random position for the "+1" text
-        const randomX = Math.floor(Math.random() * window.innerWidth) - 50 // Random X position
-        const randomY = Math.floor(Math.random() * window.innerHeight) - 50 // Random Y position
+        const randomX = Math.floor(Math.random() * window.innerWidth) - 50
+        const randomY = Math.floor(Math.random() * window.innerHeight) - 50
 
         plusOne.style.left = randomX + "px"
         plusOne.style.top = randomY + "px"
 
-        // Append the "+1" to the body
         document.body.appendChild(plusOne)
 
-        // Remove the "+1" after 1 second (fade out effect)
         setTimeout(() => {
           plusOne.remove()
-        }, 1000) // Adjust the timing for how long the "+1" stays
+        }, 1000)
       }
     </script>
 
     <style>
-      /* Center the flex container */
       .flex-container {
         display: flex;
-        justify-content: center; /* Horizontally centers the content */
-        align-items: center; /* Vertically centers the content */
-        height: 20vh; /* Ensures the container takes full height of the viewport */
-        width: 100%; /* Ensures full width */ /* Background color for contrast (optional) */
+        justify-content: center;
+        align-items: center;
+        height: 20vh;
+        width: 100%;
       }
 
       .image-button {
         display: inline-block;
         cursor: pointer;
-        transition: transform 0.1s ease-in-out; /* Smooth transition for resizing */
-        justify-content: center; /* Center horizontally */
-        align-items: center; /* Center vertically */
+        transition: transform 0.1s ease-in-out;
+        justify-content: center;
+        align-items: center;
       }
 
       .image-button img {
-        width: 150px; /* Default image size */
+        width: 150px;
         height: auto;
       }
 
       .image-button.enlarged img {
-        transform: scale(1.5); /* Scale image by 1.5x */
+        transform: scale(1.5);
       }
 
-      /* Styling for the "+1" text */
       .plus-one {
         position: absolute;
         font-size: 30px;
         color: #fff;
         font-weight: bold;
         animation: popUp 1s ease-in-out;
-        pointer-events: none; /* So it doesn't block clicks */
+        pointer-events: none;
       }
 
-      /* Animation for "+1" text */
       @keyframes popUp {
         0% {
           opacity: 0;
