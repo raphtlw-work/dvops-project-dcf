@@ -10,7 +10,7 @@ This project is a web-based Coin Flip Game where users can register, log in, and
 
 2. **Profile Management**: Users can view and edit their profile information, including their username and email.
 
-3. **Coin Flip Game**: Users can participate in a coin flip game where they choose heads or tails. If they win, their balance doubles; if they lose, their balance is reset to zero.
+3. **Coin Decider**: Users can participate in a coin flip game where they choose heads or tails. If they win, their balance doubles; if they lose, their balance is reset to zero.
 
 4. **Credit Machine**: Users can earn credits by interacting with a credit machine feature on the website.
 
@@ -47,4 +47,4 @@ This project is a web-based Coin Flip Game where users can register, log in, and
 
 6. **Balance Management**: Users can view their current balance at any time, with updates reflecting their game results and credit earnings.
 
-This documentation provides a comprehensive overview of the project's functionality and the contributions of each team member. The website offers a seamless user experience, integrating various features to engage users in a fun and interactive way.
+This documentation provides a comprehensive overview of the project's functionality and the contributions of each team member. The Coin Decider offers a seamless user experience, integrating various features to engage users in a fun and interactive way.
