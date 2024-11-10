@@ -60,6 +60,6 @@ function earnCredits() {
 }
 
 function playClickSound() {
-  var clickSound = new Audio('coinsound.mp3'); // Path to your sound file
+  var clickSound = new Audio('coinsound.mp3');
   clickSound.play();
 }
