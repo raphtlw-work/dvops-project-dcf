@@ -1,4 +1,43 @@
-const MAIN_VIEW = "home"
+let currentView = "home"
+
+function handleLocationChange() {
+  currentView = window.location.hash.replace("#", "")
+
+  document.querySelectorAll("main").forEach((el) => el.classList.add("hidden"))
+
+  // Check if user is logged in
+  const token = window.localStorage.getItem("authToken")
+
+  if (currentView.length > 0) {
+    const element = document.getElementById(`view-${currentView}`)
+    element.classList.remove("hidden")
+
+    if (token) {
+      document.getElementById("profile-navigation").classList.remove("hidden")
+      document.getElementById("balance-navigation").classList.remove("hidden")
+      fetchUserBalance(token)
+      fetchUserProfile(token)
+    }
+  } else {
+    if (token) {
+      window.location.hash = "game"
+    } else {
+      window.location.hash = "home"
+    }
+  }
+
+  if (currentView !== "home" && currentView !== "game") {
+    document.querySelector("#back-navigation").classList.remove("hidden")
+  } else {
+    document.querySelector("#back-navigation").classList.add("hidden")
+  }
+
+  if (currentView === "creditmachine") {
+    document.getElementById("balance-navigation").classList.add("hidden")
+  } else {
+    document.getElementById("balance-navigation").classList.remove("hidden")
+  }
+}
 
 function fetchUserBalance(token) {
   fetch("/user/balance", {
@@ -22,19 +61,11 @@ function fetchUserBalance(token) {
 }
 
 window.onload = () => {
-  showView(MAIN_VIEW)
-
-  document.getElementById("profile-navigation").classList.add("hidden")
-  document.getElementById("balance-navigation").classList.add("hidden")
-
-  const token = window.localStorage.getItem("authToken")
-  if (token) {
-    document.getElementById("profile-navigation").classList.remove("hidden")
-    document.getElementById("balance-navigation").classList.remove("hidden")
-    fetchUserBalance(token)
-    fetchUserProfile(token)
-    showView("game")
+  if ("onhashchange" in window) {
+    window.addEventListener("hashchange", handleLocationChange)
   }
+
+  handleLocationChange()
 
   document.getElementById("login-form").addEventListener("submit", (event) => {
     event.preventDefault()
@@ -87,7 +118,7 @@ window.onload = () => {
             .getElementById("balance-navigation")
             .classList.remove("hidden")
           fetchUserBalance(data.token)
-          showView("game")
+          pushView("game")
         } else {
           console.log(data.error)
           alert("Error submitting form.")
@@ -163,7 +194,7 @@ window.onload = () => {
         .then((data) => {
           if (data.success) {
             alert("Account created! Please login.")
-            showView("login")
+            pushView("login")
           } else {
             console.log(data.error)
             alert("Error submitting form")
@@ -176,45 +207,12 @@ window.onload = () => {
     })
 }
 
-let viewStack = [MAIN_VIEW]
-
 function pushView(name) {
-  viewStack.push(name)
-
-  const viewName = viewStack.pop()
-
-  showView(viewName)
+  window.location.hash = name
 }
 
 function popView() {
-  if (viewStack[viewStack.length - 1] !== "creditmachine") {
-    document.getElementById("balance-navigation").classList.remove("hidden")
-  }
-
-  const viewName = viewStack.pop()
-
-  showView(viewName)
-}
-
-function showView(viewName) {
-  document.querySelectorAll("main").forEach((el) => el.classList.add("hidden"))
-  document.getElementById(`view-${viewName}`).classList.remove("hidden")
-
-  if (viewName !== MAIN_VIEW) {
-    document
-      .querySelector("#back-navigation .back-btn")
-      .classList.remove("hidden")
-  } else {
-    viewStack = [MAIN_VIEW]
-    document.querySelector("#back-navigation .back-btn").classList.add("hidden")
-    if (!window.localStorage.getItem("authToken")) {
-      document.getElementById("balance-navigation").classList.remove("hidden")
-    }
-  }
-
-  if (viewName === "creditmachine" || viewName === "profile") {
-    document.getElementById("balance-navigation").classList.add("hidden")
-  }
+  window.history.back()
 }
 
 const SECONDS = 1000
