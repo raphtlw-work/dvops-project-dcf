@@ -30,7 +30,7 @@
     </div>
 
     <div class="flex flex-row" id="top-nav">
-      <div class="flex flex-col" id="back-navigation">
+      <div class="flex flex-col hidden" id="back-navigation">
         <div>
           <button onclick="popView();" class="back-btn">
             <i class="fa-solid fa-chevron-left"></i>
@@ -41,15 +41,15 @@
 
       <div class="flex-1"></div>
 
-      <div class="flex flex-col" id="profile-navigation">
+      <div class="flex flex-col hidden" id="profile-navigation">
         <div>
-          <button onclick="showView('profile');" class="back-btn">
+          <button onclick="pushView('profile');" class="back-btn">
             <i class="fa-solid fa-user"></i>
             <p>Profile</p>
           </button>
         </div>
         <div>
-          <button onclick="showView('creditmachine');" class="back-btn">
+          <button onclick="pushView('creditmachine');" class="back-btn">
             <i class="fa-solid fa-star"></i>
             <p>Credit Machine</p>
           </button>
@@ -57,7 +57,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col" id="balance-navigation">
+    <div class="flex flex-col hidden" id="balance-navigation">
       <div>
         <p>Current balance: <span id="user-balance">Loading</span></p>
       </div>
@@ -147,9 +147,11 @@
       <div class="flex flex-col">
         <h2>Tap to earn credits!</h2>
         <div class="flex-container">
-
-          <div class="image-button" onclick="toggleSize(this); earnCredits(); playClickSound();">
-            <img src="logo.png" alt="Click to enlarge">
+          <div
+            class="image-button"
+            onclick="toggleSize(this); earnCredits(); playClickSound();"
+          >
+            <img src="logo.png" alt="Click to enlarge" />
           </div>
         </div>
       </div>
@@ -319,23 +321,22 @@
       />
     </main>
     <script>
-
-      let debounceTimer;
+      let debounceTimer
 
       function toggleSize(element) {
         if (debounceTimer) {
-          clearTimeout(debounceTimer);
+          clearTimeout(debounceTimer)
         }
 
-        element.classList.add("enlarged");
+        element.classList.add("enlarged")
 
         debounceTimer = setTimeout(() => {
-          element.classList.remove("enlarged");
-        }, 20);
+          element.classList.remove("enlarged")
+        }, 20)
 
-        createPlusOneText();
+        createPlusOneText()
       }
-      
+
       function createPlusOneText() {
         const plusOne = document.createElement("div")
         plusOne.innerText = "+1"
