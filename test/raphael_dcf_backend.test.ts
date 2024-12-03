@@ -5,8 +5,8 @@ import express from "express"
 import jwt from "jsonwebtoken"
 import sinon from "sinon"
 import supertest from "supertest"
-import { db } from "../util/db" // Replace with the correct path
-import { gameRouter } from "../util/raphael_dcf_backend" // Replace with the correct path
+import { db } from "../util/db"
+import { gameRouter } from "../util/raphael_dcf_backend"
 
 // Configure Chai to use HTTP assertions
 chai.use(chaiHttp)
