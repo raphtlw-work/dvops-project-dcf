@@ -6,7 +6,8 @@
     "start": "tsx --env-file .env index.ts",
     "format": "prettier . --write",
     "studio": "drizzle-kit studio",
-    "build": "node esbuild.cjs"
+    "build": "node esbuild.cjs",
+    "test": "mocha test/**/*.test.ts"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -20,11 +21,22 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/chai": "^5.0.1",
     "@types/express": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.7",
+    "@types/mocha": "^10.0.10",
     "@types/pg": "^8.11.10",
+    "@types/sinon": "^17.0.3",
+    "@types/supertest": "^6.0.2",
+    "chai": "^5.1.2",
+    "chai-http": "^5.1.1",
     "drizzle-kit": "^0.26.2",
+    "mocha": "^11.0.1",
     "prettier": "^3.3.3",
-    "prettier-plugin-organize-imports": "^4.1.0"
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "sinon": "^19.0.2",
+    "supertest": "^7.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
   }
 }
