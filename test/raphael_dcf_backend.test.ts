@@ -1,7 +1,5 @@
 import "dotenv/config"
 
-import * as chai from "chai"
-import chaiHttp from "chai-http"
 import { PgSelectBuilder, PgUpdateBuilder } from "drizzle-orm/pg-core"
 import express from "express"
 import jwt from "jsonwebtoken"
@@ -10,13 +8,10 @@ import supertest from "supertest"
 import { db } from "../util/db"
 import { gameRouter } from "../util/raphael_dcf_backend"
 
-// Configure Chai to use HTTP assertions
-chai.use(chaiHttp)
-
 describe("POST /flip", () => {
   let app: express.Application
 
-  before(() => {
+  beforeAll(() => {
     app = express()
     app.use(express.json()) // Middleware to parse JSON bodies
     app.use("/", gameRouter) // Use your router in a test server
@@ -29,8 +24,8 @@ describe("POST /flip", () => {
   it("should return 403 if no token is provided", async () => {
     const response = await supertest(app).post("/flip").send({ amount: 50 })
 
-    chai.expect(response.status).to.equal(403)
-    chai.expect(response.body.error).to.equal("No token found")
+    expect(response.status).toBe(403)
+    expect(response.body.error).toBe("No token found")
   })
 
   it("should return 404 if user is not found", async () => {
@@ -47,8 +42,8 @@ describe("POST /flip", () => {
       .set("Authorization", `Bearer ${token}`)
       .send({ amount: 50 })
 
-    chai.expect(response.status).to.equal(404)
-    chai.expect(response.body.error).to.equal("User not found")
+    expect(response.status).toBe(404)
+    expect(response.body.error).toBe("User not found")
   })
 
   it("should return 400 for invalid amount", async () => {
@@ -65,10 +60,8 @@ describe("POST /flip", () => {
       .set("Authorization", `Bearer ${token}`)
       .send({ amount: -10 })
 
-    chai.expect(response.status).to.equal(400)
-    chai
-      .expect(response.body.error)
-      .to.equal("Amount must be between 0 and 100 credits")
+    expect(response.status).toBe(400)
+    expect(response.body.error).toBe("Amount must be between 0 and 100 credits")
   })
 
   it("should process a valid flip and update balance", async () => {
@@ -95,8 +88,8 @@ describe("POST /flip", () => {
       .set("Authorization", `Bearer ${token}`)
       .send({ amount: 50 })
 
-    chai.expect(response.status).to.equal(200)
-    chai.expect(response.body).to.have.property("result")
-    chai.expect(response.body).to.have.property("newBalance")
+    expect(response.status).toBe(200)
+    expect(response.body).toHaveProperty("result")
+    expect(response.body).toHaveProperty("newBalance")
   })
 })
