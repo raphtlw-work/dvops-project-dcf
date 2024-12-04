@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === "development") {
   })
 }
 
-const authRouter = express.Router()
+export const authRouter = express.Router()
 
 authRouter.post("/register", async (req, res) => {
   try {
