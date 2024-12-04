@@ -27,6 +27,14 @@ describe("Coin Decider Frontend Tests", () => {
   })
 
   test('should display the "Get started" button', async () => {
+    await page.evaluate(() => {
+      localStorage.removeItem('authToken')
+    })
+
+    await page.reload();
+
+    await new Promise((done) => setTimeout(done, 500))
+
     const buttonText = await page.$eval(".get-started-btn", (btn) =>
       btn.textContent?.trim(),
     )
@@ -34,6 +42,17 @@ describe("Coin Decider Frontend Tests", () => {
   })
 
   test('should navigate to login view when "Get started" is clicked', async () => {
+    const filePath = "http://localhost:3000"
+    await page.goto(filePath)
+
+    await page.evaluate(() => {
+      localStorage.removeItem('authToken')
+    })
+
+    await page.reload();
+
+    await new Promise((done) => setTimeout(done, 500))
+
     await page.click(".get-started-btn")
 
     const isLoginViewVisible = await page.$eval("#view-login", (el) => {

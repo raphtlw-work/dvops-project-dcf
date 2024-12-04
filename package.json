@@ -7,7 +7,8 @@
     "format": "prettier . --write",
     "studio": "drizzle-kit studio",
     "build": "node esbuild.cjs",
-    "test": "jest --config jest.config.ts"
+    
+    "test":"jest --config jest.config.ts"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
