@@ -1,6 +1,7 @@
+import "dotenv/config"
+
 import * as chai from "chai"
 import chaiHttp from "chai-http"
-import "dotenv/config"
 import { PgSelectBuilder, PgUpdateBuilder } from "drizzle-orm/pg-core"
 import express from "express"
 import jwt from "jsonwebtoken"
