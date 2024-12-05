@@ -6,8 +6,8 @@ import express, { Application } from "express"
 import jwt from "jsonwebtoken"
 import sinon from "sinon"
 import supertest from "supertest"
-import { db } from "../util/db"
-import { gameRouter } from "../util/raphael_dcf_backend"
+import { db } from "../util/db.js"
+import { gameRouter } from "../util/raphael_dcf_backend.js"
 
 describe("POST /flip", function () {
   let app: Application

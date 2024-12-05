@@ -1,8 +1,8 @@
 import { eq } from "drizzle-orm"
 import express from "express"
 import jwt from "jsonwebtoken"
-import { usersTable } from "../schema/db"
-import { db } from "./db"
+import { usersTable } from "../schema/db.js"
+import { db } from "./db.js"
 
 export const gameRouter = express.Router()
 

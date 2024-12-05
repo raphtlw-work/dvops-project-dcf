@@ -1,5 +1,5 @@
 import { drizzle } from "drizzle-orm/node-postgres"
-import * as schema from "../schema/db"
+import * as schema from "../schema/db.js"
 
 export const getConnectionString = () =>
   `postgresql://postgres:${process.env.POSTGRES_PASSWORD}@localhost:5432/postgres`

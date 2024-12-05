@@ -6,7 +6,7 @@
     "start": "tsx --env-file .env index.ts",
     "format": "prettier . --write",
     "studio": "drizzle-kit studio",
-    "build": "node esbuild.cjs",
+    "build": "tsc --outDir build",
     "test": "mocha test/**/*.ts"
   },
   "dependencies": {

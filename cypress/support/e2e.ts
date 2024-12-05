@@ -1,6 +1,3 @@
-import { usersTable } from "../../schema/db"
-import { db } from "../../util/db"
-
 // ***********************************************************
 // This example support/e2e.ts is processed and
 // loaded automatically before your test files.
@@ -18,9 +15,3 @@ import { db } from "../../util/db"
 
 // Import commands.js using ES2015 syntax:
 import "./commands"
-
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
-
-// Clear all users in DB
-db.delete(usersTable)

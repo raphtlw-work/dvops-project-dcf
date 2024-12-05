@@ -1,7 +1,8 @@
 describe("Raphael DCF Frontend - Login and Register Pages", () => {
-  const baseUrl = "http://localhost:3000" // Replace with your actual base URL
+  const baseUrl = "http://localhost:3000"
 
-  beforeEach(() => {
+  before(() => {
+    cy.task("clearDB")
     cy.visit(baseUrl)
   })
 
