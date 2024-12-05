@@ -4,7 +4,7 @@
 "html"
 ],
 "include": [
-"utils/*.ts"
+"utils/aslam_dcf_backend.ts"
 ],
 "reportDir": "coverage/backend",
 "branches": 80,

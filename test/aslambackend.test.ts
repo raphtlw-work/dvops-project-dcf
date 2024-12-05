@@ -1,10 +1,11 @@
+
 import "dotenv/config";
 import express from "express";
 import jwt from "jsonwebtoken";
 import sinon from "sinon";
 import supertest from "supertest";
-import { db } from "../util/db"; // Adjust this path as per your setup
-import { aslamRouter } from "../util/aslam_dcf_backend"; // Update path to your router
+import { db } from "../util/db"; 
+import { aslamRouter } from "../util/aslam_dcf_backend"; 
 import { PgTransaction } from "drizzle-orm/pg-core";
 import { usersTable } from "../schema/db";
 
@@ -106,7 +107,7 @@ describe("POST /coinflip", () => {
       .set("Authorization", `Bearer ${token}`)
       .send({ choice: "heads" });
   
-    // Assertions: Ensure that the response status is 500 and the error message is correct
+    
     expect(response.status).toBe(500);
     expect(response.body.error).toBe("Failed to update balance and record game");
   

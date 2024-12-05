@@ -7,11 +7,16 @@
     "format": "prettier . --write",
     "studio": "drizzle-kit studio",
     "build": "node esbuild.cjs",
-    "test": "jest --config jest.config.ts",
-    "backend-test": "nyc --nycrc-path .nycrc-backend mocha"
+    "test": "jest --config jest.config.ts --coverage",
+    "backend-test": "nyc --nycrc-path .nycrc-backend mocha test/chai.test.cjs"
+   
+
   },
   "dependencies": {
+    "@cypress/code-coverage": "^3.13.8",
     "bcrypt": "^5.1.1",
+    "coverage": "^0.0.0",
+    "cypress": "^13.16.1",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.35.3",
     "express": "^4.21.1",

@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Coin Decider</title>
+
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script defer src="lib/fontawesome/js/brands.js"></script>
+    <script defer src="lib/fontawesome/js/solid.js"></script>
+    <script defer src="lib/fontawesome/js/fontawesome.js"></script>
+
+    <script defer src="js/aslam_dcf_frontend.js"></script>
+    <script defer src="js/raphael_dcf_frontend.js"></script>
+    <script defer src="js/ocean_dcf_frontend.js"></script>
+    <script defer src="js/chenxin_dcf_frontend.js"></script>
+  </head>
+  <body class="dark">
+    <div class="header">
+      <div class="flipping">
+        <i class="fa-solid fa-user-group"></i>
+        <div>
+          <span id="currently-flipping">16</span>
+          <span class="title">FLIPPING</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-row" id="top-nav">
+      <div class="flex flex-col hidden" id="back-navigation">
+        <div>
+          <button onclick="popView();" class="back-btn">
+            <i class="fa-solid fa-chevron-left"></i>
+            <p>Back</p>
+          </button>
+        </div>
+      </div>
+
+      <div class="flex-1"></div>
+
+      <div class="flex flex-col hidden" id="profile-navigation">
+        <div>
+          <button onclick="pushView('profile');" class="back-btn">
+            <i class="fa-solid fa-user"></i>
+            <p>Profile</p>
+          </button>
+        </div>
+        <div>
+          <button onclick="pushView('creditmachine');" class="back-btn">
+            <i class="fa-solid fa-star"></i>
+            <p>Credit Machine</p>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col hidden" id="balance-navigation">
+      <div>
+        <p>Current balance: <span id="user-balance">Loading</span></p>
+      </div>
+    </div>
+
+    <main class="flex flex-col" id="view-home">
+      <div class="flex flex-col hero">
+        <h1>COIN DECIDER</h1>
+        <svg
+          width="252"
+          height="244"
+          viewBox="0 0 252 244"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clip-path="url(#clip0_14_11)">
+            <path
+              d="M247 129C247 189.772 197.955 239 137.5 239C77.0453 239 28 189.772 28 129C28 68.2281 77.0453 19 137.5 19C197.955 19 247 68.2281 247 129Z"
+              fill="#B0891E"
+              stroke="black"
+              stroke-width="10"
+            />
+            <path
+              d="M227 115C227 175.711 177.345 225 116 225C54.6555 225 5 175.711 5 115C5 54.2894 54.6555 5 116 5C177.345 5 227 54.2894 227 115Z"
+              fill="#FFC31E"
+              stroke="black"
+              stroke-width="10"
+            />
+            <path
+              d="M193 198L201 213"
+              stroke="black"
+              stroke-width="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M212 173L224 194"
+              stroke="black"
+              stroke-width="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M226 144L238 165"
+              stroke="black"
+              stroke-width="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M229 107L247 129"
+              stroke="black"
+              stroke-width="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M169 218L176 230"
+              stroke="black"
+              stroke-width="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M141 224L146 234"
+              stroke="black"
+              stroke-width="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M56.5087 130.426C54.2738 130.426 52.3515 129.953 50.7416 129.006C49.1412 128.049 47.9102 126.723 47.0484 125.028C46.1962 123.333 45.77 121.383 45.77 119.176C45.77 116.941 46.2009 114.981 47.0626 113.295C47.9339 111.6 49.1697 110.279 50.77 109.332C52.3704 108.376 54.2738 107.898 56.4803 107.898C58.3837 107.898 60.0503 108.243 61.4803 108.935C62.9102 109.626 64.0418 110.597 64.8751 111.847C65.7085 113.097 66.1678 114.564 66.253 116.25H60.5428C60.3818 115.161 59.9556 114.285 59.2643 113.622C58.5825 112.95 57.6876 112.614 56.5797 112.614C55.6422 112.614 54.8231 112.869 54.1223 113.381C53.431 113.883 52.8912 114.616 52.503 115.582C52.1147 116.548 51.9206 117.718 51.9206 119.091C51.9206 120.483 52.11 121.667 52.4888 122.642C52.877 123.617 53.4215 124.361 54.1223 124.872C54.8231 125.384 55.6422 125.639 56.5797 125.639C57.271 125.639 57.8912 125.497 58.4405 125.213C58.9992 124.929 59.4585 124.517 59.8183 123.977C60.1876 123.428 60.4291 122.77 60.5428 122.003H66.253C66.1583 123.67 65.7037 125.137 64.8893 126.406C64.0844 127.666 62.9717 128.651 61.5513 129.361C60.1308 130.071 58.45 130.426 56.5087 130.426ZM79.5852 130.426C77.3788 130.426 75.4706 129.957 73.8608 129.02C72.2604 128.073 71.0246 126.757 70.1534 125.071C69.2822 123.376 68.8466 121.411 68.8466 119.176C68.8466 116.922 69.2822 114.953 70.1534 113.267C71.0246 111.572 72.2604 110.256 73.8608 109.318C75.4706 108.371 77.3788 107.898 79.5852 107.898C81.7917 107.898 83.6951 108.371 85.2955 109.318C86.9053 110.256 88.1458 111.572 89.017 113.267C89.8883 114.953 90.3239 116.922 90.3239 119.176C90.3239 121.411 89.8883 123.376 89.017 125.071C88.1458 126.757 86.9053 128.073 85.2955 129.02C83.6951 129.957 81.7917 130.426 79.5852 130.426ZM79.6136 125.739C80.6174 125.739 81.4555 125.455 82.1278 124.886C82.8002 124.309 83.3068 123.523 83.6477 122.528C83.9981 121.534 84.1733 120.402 84.1733 119.134C84.1733 117.865 83.9981 116.733 83.6477 115.739C83.3068 114.744 82.8002 113.958 82.1278 113.381C81.4555 112.803 80.6174 112.514 79.6136 112.514C78.6004 112.514 77.7481 112.803 77.0568 113.381C76.375 113.958 75.8589 114.744 75.5085 115.739C75.1676 116.733 74.9972 117.865 74.9972 119.134C74.9972 120.402 75.1676 121.534 75.5085 122.528C75.8589 123.523 76.375 124.309 77.0568 124.886C77.7481 125.455 78.6004 125.739 79.6136 125.739ZM93.8585 130V108.182H99.9097V130H93.8585ZM96.8983 105.369C95.9987 105.369 95.2269 105.071 94.583 104.474C93.9485 103.868 93.6313 103.144 93.6313 102.301C93.6313 101.468 93.9485 100.753 94.583 100.156C95.2269 99.5502 95.9987 99.2472 96.8983 99.2472C97.7979 99.2472 98.565 99.5502 99.1994 100.156C99.8434 100.753 100.165 101.468 100.165 102.301C100.165 103.144 99.8434 103.868 99.1994 104.474C98.565 105.071 97.7979 105.369 96.8983 105.369ZM110.408 117.386V130H104.357V108.182H110.124V112.031H110.38C110.863 110.762 111.672 109.759 112.809 109.02C113.945 108.272 115.323 107.898 116.942 107.898C118.457 107.898 119.778 108.229 120.905 108.892C122.032 109.555 122.908 110.502 123.533 111.733C124.158 112.955 124.471 114.413 124.471 116.108V130H118.419V117.188C118.429 115.852 118.088 114.811 117.397 114.062C116.705 113.305 115.754 112.926 114.542 112.926C113.727 112.926 113.008 113.101 112.383 113.452C111.767 113.802 111.284 114.313 110.934 114.986C110.593 115.649 110.418 116.449 110.408 117.386ZM140.573 108.182V112.727H127.107V108.182H140.573ZM130.189 130V106.605C130.189 105.024 130.497 103.712 131.113 102.67C131.738 101.629 132.59 100.848 133.669 100.327C134.749 99.8059 135.975 99.5455 137.348 99.5455C138.276 99.5455 139.124 99.6165 139.891 99.7585C140.667 99.9006 141.245 100.028 141.624 100.142L140.544 104.688C140.308 104.612 140.014 104.541 139.664 104.474C139.323 104.408 138.972 104.375 138.613 104.375C137.722 104.375 137.102 104.583 136.752 105C136.401 105.407 136.226 105.98 136.226 106.719V130H130.189ZM149.921 100.909V130H143.869V100.909H149.921ZM154.368 130V108.182H160.419V130H154.368ZM157.408 105.369C156.508 105.369 155.736 105.071 155.092 104.474C154.458 103.868 154.141 103.144 154.141 102.301C154.141 101.468 154.458 100.753 155.092 100.156C155.736 99.5502 156.508 99.2472 157.408 99.2472C158.307 99.2472 159.074 99.5502 159.709 100.156C160.353 100.753 160.675 101.468 160.675 102.301C160.675 103.144 160.353 103.868 159.709 104.474C159.074 105.071 158.307 105.369 157.408 105.369ZM164.866 138.182V108.182H170.832V111.847H171.102C171.367 111.259 171.751 110.663 172.253 110.057C172.764 109.441 173.427 108.93 174.241 108.523C175.065 108.106 176.088 107.898 177.31 107.898C178.9 107.898 180.368 108.314 181.713 109.148C183.058 109.972 184.132 111.217 184.937 112.884C185.742 114.541 186.145 116.619 186.145 119.119C186.145 121.553 185.752 123.608 184.966 125.284C184.189 126.951 183.129 128.215 181.784 129.077C180.449 129.929 178.953 130.355 177.295 130.355C176.121 130.355 175.122 130.161 174.298 129.773C173.484 129.384 172.816 128.897 172.295 128.31C171.774 127.713 171.377 127.112 171.102 126.506H170.917V138.182H164.866ZM170.79 119.091C170.79 120.388 170.97 121.52 171.329 122.486C171.689 123.452 172.21 124.205 172.892 124.744C173.574 125.275 174.402 125.54 175.378 125.54C176.363 125.54 177.196 125.27 177.878 124.73C178.56 124.181 179.076 123.423 179.426 122.457C179.786 121.482 179.966 120.36 179.966 119.091C179.966 117.831 179.791 116.723 179.44 115.767C179.09 114.811 178.574 114.062 177.892 113.523C177.21 112.983 176.372 112.713 175.378 112.713C174.393 112.713 173.56 112.973 172.878 113.494C172.205 114.015 171.689 114.754 171.329 115.71C170.97 116.667 170.79 117.794 170.79 119.091Z"
+              fill="black"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_14_11">
+              <rect width="252" height="244" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="user-start">
+        <button onclick="pushView('login');" class="get-started-btn">
+          Get started
+        </button>
+      </div>
+    </main>
+
+    <main class="flex flex-col hidden" id="view-creditmachine">
+      <p>Credit Balance = <span id="userbalance">loading</span></p>
+      <div class="flex flex-col">
+        <h2>Tap to earn credits!</h2>
+        <div class="flex-container">
+          <div
+            class="image-button"
+            onclick="toggleSize(this); earnCredits(); playClickSound();"
+          >
+            <img src="logo.png" alt="Click to enlarge" />
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <main class="flex flex-col" id="view-login">
+      <div class="auth-box flex flex-col">
+        <h2>Sign in to your account</h2>
+        <form id="login-form" class="flex flex-col">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" name="email" required />
+
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" name="password" required />
+
+          <button type="submit">Continue</button>
+        </form>
+        <p>
+          Don't have an account?
+          <a href="#" onclick="pushView('register')">Sign up</a>
+        </p>
+      </div>
+    </main>
+
+    <main class="flex flex-col" id="view-register">
+      <div class="auth-box flex flex-col">
+        <h2>Create an account</h2>
+        <form id="register-form" class="flex flex-col">
+          <label for="register-username">Username</label>
+          <input type="text" id="register-username" name="username" required />
+
+          <label for="register-email">Email</label>
+          <input type="email" id="register-email" name="email" required />
+
+          <label for="register-password">Password</label>
+          <input
+            type="password"
+            id="register-password"
+            name="password"
+            required
+          />
+
+          <label for="register-confirm-password">Confirm Password</label>
+          <input
+            type="password"
+            id="register-confirm-password"
+            name="confirm_password"
+            required
+          />
+
+          <button type="submit">Sign Up</button>
+        </form>
+        <p>
+          Already have an account?
+          <a href="#" onclick="pushView('login')">Sign in</a>
+        </p>
+      </div>
+    </main>
+
+    <main class="flex flex-col hidden" id="view-profile">
+      <div class="auth-box flex flex-col">
+        <h2>Your Profile</h2>
+        <p class="profile-info">
+          Username: <span id="profile-username">Loading...</span>
+        </p>
+        <p class="profile-info">
+          Email: <span id="profile-email">Loading...</span>
+        </p>
+        <button onclick="editProfile();">Edit</button>
+      </div>
+      <button
+        onclick="window.localStorage.removeItem('authToken'); window.alert('Logged out user'); window.location = '/'"
+        style="gap: 1rem; margin-top: 4rem"
+      >
+        <i class="fa-solid fa-sign-out"></i>Log out
+      </button>
+    </main>
+
+    <main class="flex flex-col" id="view-game">
+      <div class="flex flex-col hero">
+        <h1>FLIP DECIDER</h1>
+        <svg
+          width="252"
+          height="244"
+          viewBox="0 0 252 244"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clip-path="url(#clip0_14_11)">
+            <path
+              d="M247 129C247 189.772 197.955 239 137.5 239C77.0453 239 28 189.772 28 129C28 68.2281 77.0453 19 137.5 19C197.955 19 247 68.2281 247 129Z"
+              fill="#B0891E"
+              stroke="black"
+              stroke-width="10"
+            />
+            <path
+              d="M227 115C227 175.711 177.345 225 116 225C54.6555 225 5 175.711 5 115C5 54.2894 54.6555 5 116 5C177.345 5 227 54.2894 227 115Z"
+              fill="#FFC31E"
+              stroke="black"
+              stroke-width="10"
+            />
+            <path
+              d="M193 198L201 213"
+              stroke="black"
+              stroke-width="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M212 173L224 194"
+              stroke="black"
+              stroke-width="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M226 144L238 165"
+              stroke="black"
+              stroke-width="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M229 107L247 129"
+              stroke="black"
+              stroke-width="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M169 218L176 230"
+              stroke="black"
+              stroke-width="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M141 224L146 234"
+              stroke="black"
+              stroke-width="10"
+              stroke-linecap="round"
+            />
+            <path
+              d="M56.5087 130.426C54.2738 130.426 52.3515 129.953 50.7416 129.006C49.1412 128.049 47.9102 126.723 47.0484 125.028C46.1962 123.333 45.77 121.383 45.77 119.176C45.77 116.941 46.2009 114.981 47.0626 113.295C47.9339 111.6 49.1697 110.279 50.77 109.332C52.3704 108.376 54.2738 107.898 56.4803 107.898C58.3837 107.898 60.0503 108.243 61.4803 108.935C62.9102 109.626 64.0418 110.597 64.8751 111.847C65.7085 113.097 66.1678 114.564 66.253 116.25H60.5428C60.3818 115.161 59.9556 114.285 59.2643 113.622C58.5825 112.95 57.6876 112.614 56.5797 112.614C55.6422 112.614 54.8231 112.869 54.1223 113.381C53.431 113.883 52.8912 114.616 52.503 115.582C52.1147 116.548 51.9206 117.718 51.9206 119.091C51.9206 120.483 52.11 121.667 52.4888 122.642C52.877 123.617 53.4215 124.361 54.1223 124.872C54.8231 125.384 55.6422 125.639 56.5797 125.639C57.271 125.639 57.8912 125.497 58.4405 125.213C58.9992 124.929 59.4585 124.517 59.8183 123.977C60.1876 123.428 60.4291 122.77 60.5428 122.003H66.253C66.1583 123.67 65.7037 125.137 64.8893 126.406C64.0844 127.666 62.9717 128.651 61.5513 129.361C60.1308 130.071 58.45 130.426 56.5087 130.426ZM79.5852 130.426C77.3788 130.426 75.4706 129.957 73.8608 129.02C72.2604 128.073 71.0246 126.757 70.1534 125.071C69.2822 123.376 68.8466 121.411 68.8466 119.176C68.8466 116.922 69.2822 114.953 70.1534 113.267C71.0246 111.572 72.2604 110.256 73.8608 109.318C75.4706 108.371 77.3788 107.898 79.5852 107.898C81.7917 107.898 83.6951 108.371 85.2955 109.318C86.9053 110.256 88.1458 111.572 89.017 113.267C89.8883 114.953 90.3239 116.922 90.3239 119.176C90.3239 121.411 89.8883 123.376 89.017 125.071C88.1458 126.757 86.9053 128.073 85.2955 129.02C83.6951 129.957 81.7917 130.426 79.5852 130.426ZM79.6136 125.739C80.6174 125.739 81.4555 125.455 82.1278 124.886C82.8002 124.309 83.3068 123.523 83.6477 122.528C83.9981 121.534 84.1733 120.402 84.1733 119.134C84.1733 117.865 83.9981 116.733 83.6477 115.739C83.3068 114.744 82.8002 113.958 82.1278 113.381C81.4555 112.803 80.6174 112.514 79.6136 112.514C78.6004 112.514 77.7481 112.803 77.0568 113.381C76.375 113.958 75.8589 114.744 75.5085 115.739C75.1676 116.733 74.9972 117.865 74.9972 119.134C74.9972 120.402 75.1676 121.534 75.5085 122.528C75.8589 123.523 76.375 124.309 77.0568 124.886C77.7481 125.455 78.6004 125.739 79.6136 125.739ZM93.8585 130V108.182H99.9097V130H93.8585ZM96.8983 105.369C95.9987 105.369 95.2269 105.071 94.583 104.474C93.9485 103.868 93.6313 103.144 93.6313 102.301C93.6313 101.468 93.9485 100.753 94.583 100.156C95.2269 99.5502 95.9987 99.2472 96.8983 99.2472C97.7979 99.2472 98.565 99.5502 99.1994 100.156C99.8434 100.753 100.165 101.468 100.165 102.301C100.165 103.144 99.8434 103.868 99.1994 104.474C98.565 105.071 97.7979 105.369 96.8983 105.369ZM110.408 117.386V130H104.357V108.182H110.124V112.031H110.38C110.863 110.762 111.672 109.759 112.809 109.02C113.945 108.272 115.323 107.898 116.942 107.898C118.457 107.898 119.778 108.229 120.905 108.892C122.032 109.555 122.908 110.502 123.533 111.733C124.158 112.955 124.471 114.413 124.471 116.108V130H118.419V117.188C118.429 115.852 118.088 114.811 117.397 114.062C116.705 113.305 115.754 112.926 114.542 112.926C113.727 112.926 113.008 113.101 112.383 113.452C111.767 113.802 111.284 114.313 110.934 114.986C110.593 115.649 110.418 116.449 110.408 117.386ZM140.573 108.182V112.727H127.107V108.182H140.573ZM130.189 130V106.605C130.189 105.024 130.497 103.712 131.113 102.67C131.738 101.629 132.59 100.848 133.669 100.327C134.749 99.8059 135.975 99.5455 137.348 99.5455C138.276 99.5455 139.124 99.6165 139.891 99.7585C140.667 99.9006 141.245 100.028 141.624 100.142L140.544 104.688C140.308 104.612 140.014 104.541 139.664 104.474C139.323 104.408 138.972 104.375 138.613 104.375C137.722 104.375 137.102 104.583 136.752 105C136.401 105.407 136.226 105.98 136.226 106.719V130H130.189ZM149.921 100.909V130H143.869V100.909H149.921ZM154.368 130V108.182H160.419V130H154.368ZM157.408 105.369C156.508 105.369 155.736 105.071 155.092 104.474C154.458 103.868 154.141 103.144 154.141 102.301C154.141 101.468 154.458 100.753 155.092 100.156C155.736 99.5502 156.508 99.2472 157.408 99.2472C158.307 99.2472 159.074 99.5502 159.709 100.156C160.353 100.753 160.675 101.468 160.675 102.301C160.675 103.144 160.353 103.868 159.709 104.474C159.074 105.071 158.307 105.369 157.408 105.369ZM164.866 138.182V108.182H170.832V111.847H171.102C171.367 111.259 171.751 110.663 172.253 110.057C172.764 109.441 173.427 108.93 174.241 108.523C175.065 108.106 176.088 107.898 177.31 107.898C178.9 107.898 180.368 108.314 181.713 109.148C183.058 109.972 184.132 111.217 184.937 112.884C185.742 114.541 186.145 116.619 186.145 119.119C186.145 121.553 185.752 123.608 184.966 125.284C184.189 126.951 183.129 128.215 181.784 129.077C180.449 129.929 178.953 130.355 177.295 130.355C176.121 130.355 175.122 130.161 174.298 129.773C173.484 129.384 172.816 128.897 172.295 128.31C171.774 127.713 171.377 127.112 171.102 126.506H170.917V138.182H164.866ZM170.79 119.091C170.79 120.388 170.97 121.52 171.329 122.486C171.689 123.452 172.21 124.205 172.892 124.744C173.574 125.275 174.402 125.54 175.378 125.54C176.363 125.54 177.196 125.27 177.878 124.73C178.56 124.181 179.076 123.423 179.426 122.457C179.786 121.482 179.966 120.36 179.966 119.091C179.966 117.831 179.791 116.723 179.44 115.767C179.09 114.811 178.574 114.062 177.892 113.523C177.21 112.983 176.372 112.713 175.378 112.713C174.393 112.713 173.56 112.973 172.878 113.494C172.205 114.015 171.689 114.754 171.329 115.71C170.97 116.667 170.79 117.794 170.79 119.091Z"
+              fill="black"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_14_11">
+              <rect width="252" height="244" fill="white" />
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+
+      <h3>Coin Decider</h3>
+      <div>
+        <label>
+          <input type="radio" name="choice" value="heads" /> Heads
+        </label>
+        <label>
+          <input type="radio" name="choice" value="tails" /> Tails
+        </label>
+      </div>
+      <button onclick="flipCoin()" id="flip-coin-btn">Flip Coin</button>
+      <div id="result"></div>
+      <img
+        id="flip-animation"
+        src="flipping animation.gif"
+        style="display: none"
+        alt="Flipping Coin Animation"
+      />
+    </main>
+    <script>
+      let debounceTimer
+
+      function toggleSize(element) {
+        if (debounceTimer) {
+          clearTimeout(debounceTimer)
+        }
+
+        element.classList.add("enlarged")
+
+        debounceTimer = setTimeout(() => {
+          element.classList.remove("enlarged")
+        }, 20)
+
+        createPlusOneText()
+      }
+
+      function createPlusOneText() {
+        const plusOne = document.createElement("div")
+        plusOne.innerText = "+1"
+        plusOne.classList.add("plus-one")
+
+        const randomX = Math.floor(Math.random() * window.innerWidth) - 50
+        const randomY = Math.floor(Math.random() * window.innerHeight) - 50
+
+        plusOne.style.left = randomX + "px"
+        plusOne.style.top = randomY + "px"
+
+        document.body.appendChild(plusOne)
+
+        setTimeout(() => {
+          plusOne.remove()
+        }, 1000)
+      }
+    </script>
+
+    <style>
+      .flex-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 20vh;
+        width: 100%;
+      }
+
+      .image-button {
+        display: inline-block;
+        cursor: pointer;
+        transition: transform 0.1s ease-in-out;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .image-button img {
+        width: 150px;
+        height: auto;
+      }
+
+      .image-button.enlarged img {
+        transform: scale(1.5);
+      }
+
+      .plus-one {
+        position: absolute;
+        font-size: 30px;
+        color: #fff;
+        font-weight: bold;
+        animation: popUp 1s ease-in-out;
+        pointer-events: none;
+      }
+
+      @keyframes popUp {
+        0% {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </body>
+</html>
