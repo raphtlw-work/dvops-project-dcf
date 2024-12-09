@@ -37,7 +37,7 @@
     "mocha": "^11.0.1",
     "prettier": "^3.3.3",
     "prettier-plugin-organize-imports": "^4.1.0",
-    "puppeteer": "^23.10.0",
+    "puppeteer": "^23.10.1",
     "sinon": "^19.0.2",
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.5",
