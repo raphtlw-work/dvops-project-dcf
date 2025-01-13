@@ -50,6 +50,9 @@ jobs:
         if: always()
         run: pnpm github-actions-ctrf ctrf/ctrf-report.json
 
+      - name: Install Cypress Binary
+        run: pnpm cypress install
+
       - name: Run Cypress tests
         run: pnpm cypress run
 
