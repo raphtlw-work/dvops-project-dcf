@@ -78,6 +78,9 @@ importers:
       cypress:
         specifier: ^13.16.1
         version: 13.16.1
+      cypress-ctrf-json-reporter:
+        specifier: ^0.0.11
+        version: 0.0.11
       drizzle-kit:
         specifier: ^0.26.2
         version: 0.26.2
@@ -1667,6 +1670,9 @@ packages:
   ctrf@0.0.12:
     resolution: {integrity: sha512-FLGO/5C6f4tKd5qH/8SF9nvgaqt8I57LzDCJBWuBzj/3c4cDlh4Kt3eA89ZqJxgNt9nHQ1jYAwo6BK19ThzQwQ==}
     hasBin: true
+
+  cypress-ctrf-json-reporter@0.0.11:
+    resolution: {integrity: sha512-fckUaYDEfulf8o86WZIHP760VNwMKg8g1DnR64afxryzgGRhN5n6/XpNfMfHggjO/yrRQdZb3d1X5tI6FXoMXg==}
 
   cypress@13.16.1:
     resolution: {integrity: sha512-17FtCaz0cx7ssWYKXzGB0Vub8xHwpVPr+iPt2fHhLMDhVAPVrplD+rTQsZUsfb19LVBn5iwkEUFjQ1yVVJXsLA==}
@@ -5102,6 +5108,8 @@ snapshots:
       glob: 11.0.1
       typescript: 5.7.2
       yargs: 17.7.2
+
+  cypress-ctrf-json-reporter@0.0.11: {}
 
   cypress@13.16.1:
     dependencies:

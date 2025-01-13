@@ -1,6 +1,7 @@
 import "dotenv/config"
 
 import { defineConfig } from "cypress"
+import { GenerateCtrfReport } from "cypress-ctrf-json-reporter"
 import { usersTable } from "./build/schema/db"
 import { db } from "./build/util/db"
 
@@ -14,6 +15,7 @@ export default defineConfig({
           return result
         },
       })
+      new GenerateCtrfReport({ on })
     },
   },
 })

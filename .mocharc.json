@@ -1,3 +1,4 @@
 {
-  "node-option": ["import=tsx"]
+  "node-option": ["import=tsx"],
+  "reporter": "mocha-ctrf-json-reporter"
 }
