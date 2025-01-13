@@ -30,7 +30,7 @@ jobs:
         run: npm run dev & # Run in background
         
       - name: Start Database
-        run: docker compose up db -d
+        run: docker compose up db -d --wait --wait-timeout 30
 
       - name: Push Database Schema
         run: npx drizzle-kit push
