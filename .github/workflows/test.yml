@@ -43,7 +43,7 @@ jobs:
 
       # Push database schema with drizzle-kit
       - name: Setup database schema with drizzle-kit
-        run: npm drizzle-kit push
+        run: npx drizzle-kit push
 
       # Build the application
       - name: Build application
