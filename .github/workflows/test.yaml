@@ -2,57 +2,56 @@ name: Test Pipeline
 
 on:
   push:
-
   pull_request:
-
-
+    
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: test
+      JWT_SECRET: "yO6txk2UBKuclKQZ"
+      PORT: 3000
 
     steps:
-      # Checkout the code
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18 # Use the version you need
+          node-version: 18
           cache: 'npm'
 
-      # Install dependencies
       - name: Install Dependencies
         run: npm install
 
-      # Run Backend Tests
+      - name: Start Dev Server
+        run: npm run dev & # Run in background
+        
+      - name: Start Database
+        run: docker compose up db -d
+
+      - name: Push Database Schema
+        run: npx drizzle-kit push
+
       - name: Run Backend Tests
-        env:
-          NODE_ENV: test
-          JWT_SECRET: "yO6txk2UBKuclKQZ"
         run: npm run test:api
 
-      # Run Frontend Tests
       - name: Run Frontend Tests
-        env:
-          NODE_ENV: test
         run: npm run test:ui
 
-      # Format and Lint
-      - name: Lint and Format Code
-        run: npm run format
+      - name: Stop Docker Services
+        if: always()
+        run: docker compose down
 
-      # Upload Jest Test Results
+      - name: Stop Dev Server
+        if: always()
+        run: |
+          pkill -f "npm run dev"
+
       - name: Upload Test Results
         if: always()
         uses: actions/upload-artifact@v3
         with:
           name: jest-results
           path: test-results/
-
-      # Report status
-      - name: Post Test Summary
-        if: always()
-        run: |
-          echo "All tests completed. Check the logs for details."
