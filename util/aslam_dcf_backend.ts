@@ -67,12 +67,12 @@ aslamRouter.post("/coinflip", async (req, res) => {
     await db.transaction(async (trx) => {
       await trx
         .update(usersTable)
-        .set({ balance: newBalance })
+        .set({ balance: `${newBalance}` })
         .where(eq(usersTable.id, userId))
 
       await trx.insert(gamesTable).values({
         userId: userId,
-        amount: newBalance,
+        amount: `${newBalance}`,
         win: win,
       })
     })

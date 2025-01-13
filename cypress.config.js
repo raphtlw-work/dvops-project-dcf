@@ -2,8 +2,8 @@ import "dotenv/config"
 
 import { defineConfig } from "cypress"
 import { GenerateCtrfReport } from "cypress-ctrf-json-reporter"
-import { usersTable } from "./build/schema/db"
-import { db } from "./build/util/db"
+import { usersTable } from "./cypress/build/schema/db"
+import { db } from "./cypress/build/util/db"
 
 export default defineConfig({
   e2e: {

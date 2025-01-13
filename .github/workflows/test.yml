@@ -44,7 +44,7 @@ jobs:
         run: pnpm drizzle-kit push
 
       - name: Run backend tests with Mocha
-        run: pnpm run test
+        run: pnpm test:api
 
       - name: Publish Mocha Test Results
         if: always()
@@ -54,7 +54,7 @@ jobs:
         run: pnpm cypress install
 
       - name: Run Cypress tests
-        run: pnpm cypress run
+        run: pnpm test:ui
 
       - name: Publish Cypress Test Results
         if: always()
