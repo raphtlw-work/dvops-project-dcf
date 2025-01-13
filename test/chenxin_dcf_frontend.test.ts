@@ -45,7 +45,7 @@ describe('Profile Page Tests', () => {
       localStorage.setItem('authToken', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InNuYWNrQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoic25hY2siLCJiYWxhbmNlIjoiMC4wMCJ9LCJpYXQiOjE3MzMzMzU4NjMsImV4cCI6MTczMzU5NTA2M30.YOUR_VALID_SIGNATURE");
     });
 
-    await page.goto(profileUrl, { waitUntil: 'networkidle0' });
+    await page.goto(profileUrl);
 
     try {
       await page.waitForSelector('#view-profile', { timeout: 5000 });
