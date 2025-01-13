@@ -48,14 +48,14 @@ jobs:
 
       - name: Publish Mocha Test Results
         if: always()
-        run: pnpx github-actions-ctrf ctrf/ctrf-report.json
+        run: pnpm github-actions-ctrf ctrf/ctrf-report.json
 
       - name: Run Cypress tests
-        run: pnpx cypress run
+        run: pnpm cypress run
 
       - name: Publish Cypress Test Results
         if: always()
-        run: pnpx github-actions-ctrf ctrf/ctrf-report.json
+        run: pnpm github-actions-ctrf ctrf/ctrf-report.json
 
       # Stop Docker Compose services
       - name: Stop Docker Compose services
