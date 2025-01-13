@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_ENV: test
+      POSTGRES_PASSWORD: "QTadFsylIQlo"
       JWT_SECRET: "yO6txk2UBKuclKQZ"
       PORT: 3000
 
