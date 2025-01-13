@@ -1,13 +1,14 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "tsx watch --env-file .env index.ts",
-    "dev:docker": "docker compose up --watch",
-    "start": "tsx --env-file .env index.ts",
+    "dev:api": "tsx watch --env-file .env index.ts",
+    "dev:db": "docker compose up db",
     "format": "prettier . --write",
     "studio": "drizzle-kit studio",
-    "build": "node esbuild.cjs",
-    "test": "jest --config jest.config.ts"
+    "build": "tsup index.ts",
+    "test:ui": "tsup util/db.ts cypress run",
+    "test:api": "mocha test/**/*.ts",
+    "coverage": "nyc npm run test"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -20,28 +21,33 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@jest/types": "^29.6.3",
+    "@flydotio/dockerfile": "^0.6.1",
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
+    "@tsconfig/node23": "^23.0.0",
     "@types/bcrypt": "^5.0.2",
     "@types/chai": "^5.0.1",
     "@types/express": "^5.0.0",
-    "@types/jest": "^29.5.14",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/mocha": "^10.0.10",
+    "@types/node": "^22.10.1",
     "@types/pg": "^8.11.10",
     "@types/sinon": "^17.0.3",
     "@types/supertest": "^6.0.2",
     "chai": "^5.1.2",
     "chai-http": "^5.1.1",
+    "cypress": "^13.16.1",
+    "cypress-ctrf-json-reporter": "^0.0.11",
     "drizzle-kit": "^0.26.2",
-    "jest": "^29.7.0",
+    "github-actions-ctrf": "^0.0.57",
     "mocha": "^11.0.1",
+    "mocha-ctrf-json-reporter": "^0.0.6",
+    "nyc": "^17.1.0",
     "prettier": "^3.3.3",
     "prettier-plugin-organize-imports": "^4.1.0",
     "puppeteer": "^23.10.0",
     "sinon": "^19.0.2",
     "supertest": "^7.0.0",
-    "ts-jest": "^29.2.5",
-    "ts-node": "^10.9.2",
+    "tsup": "^8.3.5",
     "typescript": "^5.7.2"
   }
 }

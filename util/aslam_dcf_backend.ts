@@ -1,8 +1,8 @@
+import { gamesTable, usersTable } from "@/schema/db"
+import { db } from "@/util/db"
 import { eq } from "drizzle-orm"
 import express from "express"
 import jwt from "jsonwebtoken"
-import { gamesTable, usersTable } from "../schema/db.js"
-import { db } from "./db.js"
 
 export const aslamRouter = express.Router()
 
@@ -67,12 +67,12 @@ aslamRouter.post("/coinflip", async (req, res) => {
     await db.transaction(async (trx) => {
       await trx
         .update(usersTable)
-        .set({ balance: newBalance })
+        .set({ balance: `${newBalance}` })
         .where(eq(usersTable.id, userId))
 
       await trx.insert(gamesTable).values({
         userId: userId,
-        amount: newBalance,
+        amount: `${newBalance}`,
         win: win,
       })
     })

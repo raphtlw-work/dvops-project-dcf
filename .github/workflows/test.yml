@@ -1,0 +1,65 @@
+name: Test Frontend and Backend
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    env:
+      PORT: 3000
+      DEBUG: true
+      NODE_ENV: "development"
+      POSTGRES_PASSWORD: "test123"
+      JWT_SECRET: "test456"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 10
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      # Start Docker Compose services
+      - name: Start services with Docker Compose
+        run: docker compose up -d --wait --wait-timeout 30
+
+      # Push database schema with drizzle-kit
+      - name: Setup database schema with drizzle-kit
+        run: pnpm drizzle-kit push
+
+      - name: Run backend tests with Mocha
+        run: pnpm test:api
+
+      - name: Publish Mocha Test Results
+        if: always()
+        run: pnpm github-actions-ctrf ctrf/ctrf-report.json
+
+      - name: Install Cypress Binary
+        run: pnpm cypress install
+
+      - name: Run Cypress tests
+        run: pnpm test:ui
+
+      - name: Publish Cypress Test Results
+        if: always()
+        run: pnpm github-actions-ctrf ctrf/ctrf-report.json
+
+      # Stop Docker Compose services
+      - name: Stop Docker Compose services
+        run: docker compose down
