@@ -10,7 +10,6 @@ describe('Profile Page Tests', () => {
     browser = await puppeteer.launch({
       headless: true, // Set to false to view browser actions
       defaultViewport: null,
-      executablePath: process.env.BROWSER_PATH,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
