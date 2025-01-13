@@ -50,15 +50,12 @@ jobs:
         if: always()
         run: pnpx github-actions-ctrf ctrf-report.json
 
-      - name: Install Cypress
-        run: pnpm add cypress --save-dev
-
       - name: Run Cypress tests
-        run: pnpx cypress run --reporter json --reporter-options output=ctrf-cypress-report.json
+        run: pnpx cypress run
 
       - name: Publish Cypress Test Results
         if: always()
-        run: pnpx github-actions-ctrf ctrf-cypress-report.json
+        run: pnpx github-actions-ctrf ctrf-report.json
 
       # Stop Docker Compose services
       - name: Stop Docker Compose services
