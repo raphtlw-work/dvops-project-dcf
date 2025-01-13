@@ -1,8 +1,10 @@
 name: Test Frontend and Backend
 
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   test:
@@ -28,15 +30,25 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      # Start Docker Compose services
+      - name: Start services with Docker Compose
+        run: docker compose up -d
+        env:
+          NODE_ENV: test
+
+      # Wait for services to be ready
+      - name: Wait for services to be ready
+        run: sleep 10
+
       - name: Run backend tests with Mocha
-        run: npm test
+        run: pnpm run test
 
       - name: Publish Mocha Test Results
         if: always()
         run: npx github-actions-ctrf ctrf-report.json
 
       - name: Install Cypress
-        run: npm install cypress
+        run: pnpm add cypress --save-dev
 
       - name: Run Cypress tests
         run: npx cypress run --reporter json --reporter-options output=ctrf-cypress-report.json
@@ -44,3 +56,7 @@ jobs:
       - name: Publish Cypress Test Results
         if: always()
         run: npx github-actions-ctrf ctrf-cypress-report.json
+
+      # Stop Docker Compose services
+      - name: Stop Docker Compose services
+        run: docker compose down
