@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import puppeteer, { Browser, Page } from 'puppeteer-core';
+import puppeteer, { Browser, Page } from 'puppeteer';
 
 describe('Profile Page Tests', () => {
   let browser: Browser;
