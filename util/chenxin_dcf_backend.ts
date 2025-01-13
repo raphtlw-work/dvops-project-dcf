@@ -2,8 +2,8 @@
 import { eq } from "drizzle-orm"
 import express from "express"
 import jwt from "jsonwebtoken"
-import { usersTable } from "../schema/db.js" // Your users table schema
-import { db } from "./db.js" // Your Drizzle ORM instance
+import { usersTable } from "../schema/db" // Your users table schema
+import { db } from "./db" // Your Drizzle ORM instance
 
 export const chenxinRouter = express.Router()
 
