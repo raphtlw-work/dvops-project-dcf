@@ -1,8 +1,8 @@
+import { gamesTable, usersTable } from "@/schema/db"
+import { db } from "@/util/db"
 import { eq } from "drizzle-orm"
 import express from "express"
 import jwt from "jsonwebtoken"
-import { gamesTable, usersTable } from "../schema/db"
-import { db } from "./db"
 
 export const aslamRouter = express.Router()
 
