@@ -6,7 +6,7 @@
     "start": "tsx --env-file .env index.ts",
     "format": "prettier . --write",
     "studio": "drizzle-kit studio",
-    "build": "tsc --outDir build",
+    "build": "tsup index.ts",
     "test": "mocha test/**/*.ts",
     "coverage": "nyc npm run test"
   },
@@ -23,6 +23,7 @@
   "devDependencies": {
     "@flydotio/dockerfile": "^0.6.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
+    "@tsconfig/node23": "^23.0.0",
     "@types/bcrypt": "^5.0.2",
     "@types/chai": "^5.0.1",
     "@types/express": "^5.0.0",
@@ -45,6 +46,7 @@
     "puppeteer": "^23.10.0",
     "sinon": "^19.0.2",
     "supertest": "^7.0.0",
+    "tsup": "^8.3.5",
     "typescript": "^5.7.2"
   }
 }
