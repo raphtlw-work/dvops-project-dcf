@@ -47,7 +47,7 @@ jobs:
 
       # Build the application
       - name: Build application
-        run: npm build
+        run: npm run build
 
       # Start the server
       - name: Start server
