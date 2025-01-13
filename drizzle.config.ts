@@ -1,7 +1,7 @@
 import "dotenv/config"
 
-import { getConnectionString } from "@/util/db"
 import { defineConfig } from "drizzle-kit"
+import { getConnectionString } from "./util/db"
 
 export default defineConfig({
   out: "./drizzle",
