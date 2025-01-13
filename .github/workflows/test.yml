@@ -1,0 +1,92 @@
+name: Test Frontend and Backend
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    env:
+      PORT: 3000
+      DEBUG: true
+      NODE_ENV: "development"
+      POSTGRES_PASSWORD: "test123"
+      JWT_SECRET: "test456"
+      BROWSER_PATH: "/usr/bin/google-chrome"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 10
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install Chrome
+        run: |
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Install dependencies
+        run: pnpm install
+
+      # Start Docker Compose services
+      - name: Start services with Docker Compose
+        run: docker compose up -d --wait --wait-timeout 30
+
+      # Push database schema with drizzle-kit
+      - name: Setup database schema with drizzle-kit
+        run: pnpm drizzle-kit push
+
+      # Build the application
+      - name: Build application
+        run: pnpm build
+
+      # Start the server
+      - name: Start server
+        run: |
+          pnpm start &
+          echo $! > server.pid
+          sleep 10 # Wait for server to start
+
+      # Run tests
+      - name: Run all tests
+        run: pnpm test
+
+      # Clean up server
+      - name: Stop server
+        if: always()
+        run: |
+          if [ -f server.pid ]; then
+            kill $(cat server.pid)
+            rm server.pid
+          fi
+
+      # Stop Docker Compose services
+      - name: Stop Docker Compose services
+        if: always()
+        run: docker compose down
+
+      # Upload test results
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            coverage/
+            junit.xml
+          retention-days: 30
