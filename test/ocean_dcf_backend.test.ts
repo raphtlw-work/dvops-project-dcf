@@ -54,35 +54,53 @@ describe("POST /user/balance", () => {
     }
   })
 
-//   it("should return 500 if updating balance fails", async () => {
-//     const originalUpdate = db.update
-//     db.update = jest.fn().mockImplementation(() => {
-//       throw new Error("Database error")
-//     })
+  it("should return 500 if updating balance fails", async () => {
+    // Sign up a test user first
+    const signupResponse = await supertest(app)
+      .post("/user/signup")
+      .send({
+        email: "test@example.com",
+        password: "password123",
+        username: "testuser"
+      });
 
-//     const response = await supertest(app)
-//       .post("/user/balance")
-//       .set("Authorization", `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6ImFzbGFtQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiYXNsYW0iLCJiYWxhbmNlIjoiMTAwLjAwIiwicGFzc3dvcmQiOiIkMmIkMTAkSmI1MFlCWEdEY1ZublNFRm5KMnBVLkRQZGRFMTJmTHRBMmEvaWFuYzc2ZEU3VVRBcFYzQ3kifSwiaWF0IjoxNzM2Nzk4NjQ3LCJleHAiOjE3MzcwNTc4NDd9.lvhYM2Icv6jMmfIG6XYeSJtkAjrnB87DaHpQ_SN7WRs`)
-//       .send({ balance: 100 })
+    expect(signupResponse.status).toBe(200);
+    const authToken = signupResponse.body.token;
 
-//     expect(response.status).toBe(500)
-//     expect(response.body.error).toBe("Failed to update balance")
+    // Mock database error
+    const originalUpdate = db.update;
+    db.update = jest.fn().mockImplementation(() => {
+      throw new Error("Database error");
+    });
 
-//     db.update = originalUpdate
-//   })
+    // Test balance update with new token
+    const response = await supertest(app)
+      .post("/user/balance")
+      .set("Authorization", `Bearer ${authToken}`)
+      .send({ balance: 100 });
 
-//   it("should update balance successfully", async () => {
-//     const balance = 200
-//     const response = await supertest(app)
-//       .post("/user/balance")
-//       .set("Authorization", `Bearer ${token}`)
-//       .send({ balance })
+    expect(response.status).toBe(500);
+    expect(response.body.error).toBe("Failed to update balance");
 
-//     const dbUser = await db.select().from(usersTable).where(eq(usersTable.id, userId))
+    // Restore original db.update
+    db.update = originalUpdate;
 
-//     expect(response.status).toBe(200)
-//     expect(parseInt(response.body.balance)).toEqual(balance)
+    // Clean up test user
+    await db.delete(usersTable).where(eq(usersTable.email, "test@example.com"));
+  })
 
-//     expect(parseInt(dbUser[0].balance)).toEqual(balance)
-//   })
-// })
+  it("should update balance successfully", async () => {
+    const balance = 200
+    const response = await supertest(app)
+      .post("/user/balance")
+      .set("Authorization", `Bearer ${token}`)
+      .send({ balance })
+
+    const dbUser = await db.select().from(usersTable).where(eq(usersTable.id, userId))
+
+    expect(response.status).toBe(200)
+    expect(parseInt(response.body.balance)).toEqual(balance)
+
+    expect(parseInt(dbUser[0].balance)).toEqual(balance)
+  })
+})
