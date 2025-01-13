@@ -6,57 +6,68 @@ describe('Profile Page Tests', () => {
   let page: Page;
 
   beforeAll(async () => {
-    // Launch Puppeteer browser with slowMo optionxx
+    // First check if the server is running
+    try {
+      const response = await fetch('http://localhost:3000');
+      if (!response.ok) {
+        throw new Error('Server is not responding properly');
+      }
+    } catch (error) {
+      console.error('Please ensure the frontend server is running on http://localhost:3000');
+      process.exit(1);
+    }
+
     browser = await puppeteer.launch({
-      headless: true, // Set to false to view browser actions
+      headless: true,
       defaultViewport: null,
+      executablePath: process.env.BROWSER_PATH,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
         '--disable-gpu'
       ],
-      ignoreDefaultArgs: true,
-      slowMo: 100 // Add a 100ms delay between each operation
+      ignoreDefaultArgs: ['--enable-automation'],
+      slowMo: 100
     });
     page = await browser.newPage();
   });
 
   afterAll(async () => {
-    // Close the browser after tests
     await browser.close();
   }, 50 * 1000);
 
   test('should navigate to the profile page and edit the profile', async () => {
     const profileUrl = 'http://localhost:3000/#profile';
 
-    await page.goto(profileUrl);
+    // Set token before navigation
+    await page.evaluateOnNewDocument(() => {
+      localStorage.setItem('authToken', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InNuYWNrQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoic25hY2siLCJiYWxhbmNlIjoiMC4wMCJ9LCJpYXQiOjE3MzMzMzU4NjMsImV4cCI6MTczMzU5NTA2M30.YOUR_VALID_SIGNATURE");
+    });
 
-    await page.evaluate(() => {
-        window.localStorage.setItem('authToken', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InNuYWNrQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoic25hY2siLCJiYWxhbmNlIjoiMC4wMCIsInBhc3N3b3JkIjoiJDJiJDEwJDFOMzQxdVFabW83UWdBd3BRWlJGOS4xT2drSmU0ZVpGcWUxU0w4OVZ2cU5BMlVUd1FhUElLIn0sImlhdCI6MTczMzMzNTg2MywiZXhwIjoxNzMzNTk1MDYzfQ.rvSOnO_7rwHg0FC3uQ1opwoqB4mKsFfUoI1_M0jEZqE")
-    })
+    await page.goto(profileUrl, { waitUntil: 'networkidle0' });
 
-    await page.waitForSelector('#view-profile'); // Wait for profile view to load
+    try {
+      await page.waitForSelector('#view-profile', { timeout: 5000 });
+    } catch (error) {
+      console.error('Profile view did not load. Check if the page is properly rendering.');
+      throw error;
+    }
 
     // Click the edit button to enable profile editing
     await page.click('#view-profile button');
 
-    // Wait for the input fields to appear and fill them with new values
+    // Wait for and fill the input fields
     await page.waitForSelector('#edit-username');
-    await page.$eval('#edit-username', (el) => {
-        (el as HTMLInputElement).value = 'updateduser';
-    });
-    await page.$eval('#edit-email', (el) => {
-        (el as HTMLInputElement).value = 'updateduser@example.com';
-    });
+    await page.type('#edit-username', 'updateduser', { delay: 100 });
+    await page.type('#edit-email', 'updateduser@example.com', { delay: 100 });
 
-    // Click the save button to save the updated profile
+    // Click save and wait for update
     await page.click('#view-profile button');
 
-    // Wait for the profile update to complete and check the updated values
-    await page.waitForSelector('#profile-username');
-    const updatedUsername = await page.$eval('#profile-username', (el) => el.textContent);
-    const updatedEmail = await page.$eval('#profile-email', (el) => el.textContent);
+    // Verify updates
+    const updatedUsername = await page.$eval('#profile-username', el => el.textContent);
+    const updatedEmail = await page.$eval('#profile-email', el => el.textContent);
     
     expect(updatedUsername).toBe('updateduser');
     expect(updatedEmail).toBe('updateduser@example.com');
