@@ -49,25 +49,9 @@ jobs:
       - name: Build application
         run: npm run build
 
-      # Start the server
-      - name: Start server
-        run: |
-          node dist/index.js &
-          echo $! > server.pid
-          sleep 10 # Wait for server to start
-
       # Run tests
       - name: Run all tests
         run: npm test
-
-      # Clean up server
-      - name: Stop server
-        if: always()
-        run: |
-          if [ -f server.pid ]; then
-            kill $(cat server.pid)
-            rm server.pid
-          fi
 
       # Stop Docker Compose services
       - name: Stop Docker Compose services
