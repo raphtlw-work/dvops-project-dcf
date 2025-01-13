@@ -7,7 +7,7 @@ import { db } from "../util/db"
 import { usersTable } from "../schema/db"
 import { eq } from "drizzle-orm"
 
-jest.setTimeout(100000)
+jest.setTimeout(10000)
 
 describe("POST /user/balance", () => {
   let app: express.Application
