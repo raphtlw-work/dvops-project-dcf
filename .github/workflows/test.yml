@@ -52,7 +52,7 @@ jobs:
       # Start the server
       - name: Start server
         run: |
-          npm start &
+          node dist/index.js &
           echo $! > server.pid
           sleep 10 # Wait for server to start
 

@@ -1,12 +1,12 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "tsx watch --env-file .env index.ts",
+    "dev": "tsx watch index.ts",
     "dev:docker": "docker compose up --watch",
-    "start": "tsx --env-file .env index.ts",
+    "start": "node dist/index.js",
     "format": "prettier . --write",
     "studio": "drizzle-kit studio",
-    "build": "tsup index.ts",
+    "build": "tsup --config tsup.config.ts",
     "test": "jest --config jest.config.ts"
   },
   "dependencies": {
