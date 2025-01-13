@@ -6,7 +6,7 @@
     "format": "prettier . --write",
     "studio": "drizzle-kit studio",
     "build": "tsup index.ts",
-    "test:ui": "tsc --outDir cypress/build && cypress run",
+    "test:ui": "tsup util/db.ts cypress run",
     "test:api": "mocha test/**/*.ts",
     "coverage": "nyc npm run test"
   },

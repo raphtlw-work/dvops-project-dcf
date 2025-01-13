@@ -4,7 +4,7 @@ import { exec } from "child_process"
 import { defineConfig } from "cypress"
 import { GenerateCtrfReport } from "cypress-ctrf-json-reporter"
 import { sql } from "drizzle-orm"
-import { db } from "./cypress/build/util/db"
+import { db } from "./dist/db"
 
 export default defineConfig({
   e2e: {
