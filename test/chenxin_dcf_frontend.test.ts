@@ -11,6 +11,12 @@ describe('Profile Page Tests', () => {
       headless: false, // Set to false to view browser actions
       defaultViewport: null,
       executablePath: process.env.BROWSER_PATH,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu'
+      ],
       ignoreDefaultArgs: true,
       slowMo: 100 // Add a 100ms delay between each operation
     });
