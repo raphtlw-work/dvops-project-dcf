@@ -1,9 +1,8 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "tsx watch --env-file .env index.ts",
-    "dev:docker": "docker compose up --watch",
-    "start": "tsx --env-file .env index.ts",
+    "dev:api": "tsx watch --env-file .env index.ts",
+    "dev:db": "docker compose up db",
     "format": "prettier . --write",
     "studio": "drizzle-kit studio",
     "build": "tsup index.ts",
