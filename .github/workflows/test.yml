@@ -3,6 +3,7 @@ name: Test Frontend and Backend
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   test:
@@ -32,7 +33,11 @@ jobs:
       - name: Start services with Docker Compose
         run: docker compose up -d
         env:
-          NODE_ENV: test
+          PORT: 3000
+          DEBUG: true
+          NODE_ENV: "development"
+          POSTGRES_PASSWORD: "test123"
+          JWT_SECRET: "test456"
 
       # Wait for services to be ready
       - name: Wait for services to be ready
