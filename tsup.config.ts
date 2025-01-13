@@ -8,7 +8,6 @@ export default defineConfig({
   outDir: 'dist',
   treeshake: true,
   splitting: true,
-  // This ensures .ts extensions are handled correctly
   esbuildOptions(options) {
     options.resolveExtensions = ['.ts', '.js']
   }

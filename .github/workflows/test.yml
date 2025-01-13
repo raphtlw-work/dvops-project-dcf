@@ -16,7 +16,6 @@ jobs:
       POSTGRES_PASSWORD: "test123"
       JWT_SECRET: "test456"
       BROWSER_PATH: "/usr/bin/google-chrome"
-      # Add these environment variables for Chrome
       DISPLAY: ":99.0"
       PUPPETEER_EXECUTABLE_PATH: "/usr/bin/google-chrome"
 
