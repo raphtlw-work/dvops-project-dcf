@@ -62,7 +62,7 @@ describe("POST /user/balance", () => {
 
     const response = await supertest(app)
       .post("/user/balance")
-      .set("Authorization", `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6IllvdXJNb20xMjNAZ21haWwuY29tIiwidXNlcm5hbWUiOiJZb3VyTW9tMTIzIiwiYmFsYW5jZSI6IjEwNC4wMCIsInBhc3N3b3JkIjoiJDJiJDEwJEZONGhyRWdSLkVTWWdnSC90a2djL3U2ZzVDMEgydzMwbU9BUTdmbmZaV1V6WHM0RzkvcXhlIn0sImlhdCI6MTczMzMxNTg2MSwiZXhwIjoxNzMzNTc1MDYxfQ.A0Zq4t1ydEJSrj0jrLAeok60rbvw-zHrhwj4a2WOg30`)
+      .set("Authorization", `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6ImFzbGFtQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiYXNsYW0iLCJiYWxhbmNlIjoiMTAwLjAwIiwicGFzc3dvcmQiOiIkMmIkMTAkSmI1MFlCWEdEY1ZublNFRm5KMnBVLkRQZGRFMTJmTHRBMmEvaWFuYzc2ZEU3VVRBcFYzQ3kifSwiaWF0IjoxNzM2Nzk4NjQ3LCJleHAiOjE3MzcwNTc4NDd9.lvhYM2Icv6jMmfIG6XYeSJtkAjrnB87DaHpQ_SN7WRs`)
       .send({ balance: 100 })
 
     expect(response.status).toBe(500)

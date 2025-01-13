@@ -110,6 +110,7 @@ window.onload = () => {
       .then((data) => {
         if (data.success) {
           alert("Login Success!")
+          console.log(data.token)
           window.localStorage.setItem("authToken", data.token)
           document
             .getElementById("profile-navigation")
@@ -118,6 +119,7 @@ window.onload = () => {
             .getElementById("balance-navigation")
             .classList.remove("hidden")
           fetchUserBalance(data.token)
+          console.log(data.token)
           pushView("game")
         } else {
           console.log(data.error)
@@ -247,6 +249,7 @@ function saveProfile() {
   const newEmail = document.getElementById("edit-email").value
 
   const token = window.localStorage.getItem("authToken")
+
 
   fetch("/user/profile", {
     method: "PUT",
