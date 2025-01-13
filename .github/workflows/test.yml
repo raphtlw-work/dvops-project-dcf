@@ -39,9 +39,9 @@ jobs:
       - name: Start services with Docker Compose
         run: docker compose up -d
 
-      # Wait for services to be ready
-      - name: Wait for services to be ready
-        run: sleep 10
+      # Push database schema with drizzle-kit
+      - name: Setup database schema with drizzle-kit
+        run: pnpm drizzle-kit push
 
       - name: Run backend tests with Mocha
         run: pnpm run test
