@@ -53,7 +53,7 @@ jobs:
 
       # Start Docker Compose services
       - name: Start services with Docker Compose
-        run: docker compose up db -d --wait --wait-timeout 30
+        run: docker compose up -d --wait --wait-timeout 30
 
       # Push database schema with drizzle-kit
       - name: Setup database schema with drizzle-kit
