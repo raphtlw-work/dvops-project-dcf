@@ -1,6 +1,10 @@
 import 'dotenv/config';
 import puppeteer, { Browser, Page } from 'puppeteer';
 
+function wait(milliseconds: number) {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
 describe('Profile Page Tests', () => {
   let browser: Browser;
   let page: Page;
@@ -18,7 +22,7 @@ describe('Profile Page Tests', () => {
     }
 
     browser = await puppeteer.launch({
-      headless: true,
+      headless: false,
       defaultViewport: null,
       executablePath: process.env.BROWSER_PATH,
       args: [
@@ -57,13 +61,26 @@ describe('Profile Page Tests', () => {
     // Click the edit button to enable profile editing
     await page.click('#view-profile button');
 
-    // Wait for and fill the input fields
+    page.on('dialog', async dialog => {
+      await dialog.accept(); // This will click OK on any alert
+    });
+
+    // Wait for input fields
     await page.waitForSelector('#edit-username');
-    await page.type('#edit-username', 'updateduser', { delay: 100 });
-    await page.type('#edit-email', 'updateduser@example.com', { delay: 100 });
+    await page.waitForSelector('#edit-email');
+
+    // Clear input fields before typing
+    await page.$eval('#edit-username', el => (el as HTMLInputElement).value = '');
+    await page.$eval('#edit-email', el => (el as HTMLInputElement).value = '');
+
+    // Type new values
+    await page.type('#edit-username', 'updateduser', { delay: 10 });
+    await page.type('#edit-email', 'updateduser@example.com', { delay: 10 });
 
     // Click save and wait for update
     await page.click('#view-profile button');
+    
+    await wait(2000);
 
     // Verify updates
     const updatedUsername = await page.$eval('#profile-username', el => el.textContent);

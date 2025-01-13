@@ -30,12 +30,6 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      # Set up virtual display for Chrome
-      - name: Set up virtual display
-        run: |
-          sudo apt-get install -y xvfb
-          Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-
       - name: Install Chrome dependencies
         run: |
           sudo apt-get update
