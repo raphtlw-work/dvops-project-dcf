@@ -11,19 +11,12 @@ export default defineConfig({
       // implement node event listeners here
       on("task", {
         async clearDB() {
-          // prettier-ignore
-          const query = sql`
-            SELECT table_name
-            FROM information_schema.tables
-            WHERE table_schema = 'public'
-              AND table_type = 'BASE TABLE'`
+          const result = await db.execute(sql`
+            DROP SCHEMA public CASCADE;
+            CREATE SCHEMA public;
+          `)
 
-          const tables = await db.execute(query) // retrieve tables
-
-          for (let table of tables) {
-            const query = sql.raw(`TRUNCATE TABLE ${table.table_name} CASCADE;`)
-            await db.execute(query) // Truncate (clear all the data) the table
-          }
+          return result
         },
       })
       new GenerateCtrfReport({ on })
