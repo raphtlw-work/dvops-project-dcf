@@ -8,7 +8,7 @@ describe('Profile Page Tests', () => {
   beforeAll(async () => {
     // Launch Puppeteer browser with slowMo optionxx
     browser = await puppeteer.launch({
-      headless: false, // Set to false to view browser actions
+      headless: true, // Set to false to view browser actions
       defaultViewport: null,
       executablePath: process.env.BROWSER_PATH,
       args: [
