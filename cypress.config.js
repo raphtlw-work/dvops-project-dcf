@@ -12,11 +12,11 @@ export default defineConfig({
       on("task", {
         async clearDB() {
           // prettier-ignore
-          const query = sql `
+          const query = sql`
             SELECT table_name
             FROM information_schema.tables
             WHERE table_schema = 'public'
-              AND table_type = 'BASE TABLE`
+              AND table_type = 'BASE TABLE'`
 
           const tables = await db.execute(query) // retrieve tables
 
