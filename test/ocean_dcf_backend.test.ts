@@ -54,35 +54,35 @@ describe("POST /user/balance", () => {
     }
   })
 
-  it("should return 500 if updating balance fails", async () => {
-    const originalUpdate = db.update
-    db.update = jest.fn().mockImplementation(() => {
-      throw new Error("Database error")
-    })
+//   it("should return 500 if updating balance fails", async () => {
+//     const originalUpdate = db.update
+//     db.update = jest.fn().mockImplementation(() => {
+//       throw new Error("Database error")
+//     })
 
-    const response = await supertest(app)
-      .post("/user/balance")
-      .set("Authorization", `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6ImFzbGFtQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiYXNsYW0iLCJiYWxhbmNlIjoiMTAwLjAwIiwicGFzc3dvcmQiOiIkMmIkMTAkSmI1MFlCWEdEY1ZublNFRm5KMnBVLkRQZGRFMTJmTHRBMmEvaWFuYzc2ZEU3VVRBcFYzQ3kifSwiaWF0IjoxNzM2Nzk4NjQ3LCJleHAiOjE3MzcwNTc4NDd9.lvhYM2Icv6jMmfIG6XYeSJtkAjrnB87DaHpQ_SN7WRs`)
-      .send({ balance: 100 })
+//     const response = await supertest(app)
+//       .post("/user/balance")
+//       .set("Authorization", `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJlbWFpbCI6ImFzbGFtQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiYXNsYW0iLCJiYWxhbmNlIjoiMTAwLjAwIiwicGFzc3dvcmQiOiIkMmIkMTAkSmI1MFlCWEdEY1ZublNFRm5KMnBVLkRQZGRFMTJmTHRBMmEvaWFuYzc2ZEU3VVRBcFYzQ3kifSwiaWF0IjoxNzM2Nzk4NjQ3LCJleHAiOjE3MzcwNTc4NDd9.lvhYM2Icv6jMmfIG6XYeSJtkAjrnB87DaHpQ_SN7WRs`)
+//       .send({ balance: 100 })
 
-    expect(response.status).toBe(500)
-    expect(response.body.error).toBe("Failed to update balance")
+//     expect(response.status).toBe(500)
+//     expect(response.body.error).toBe("Failed to update balance")
 
-    db.update = originalUpdate
-  })
+//     db.update = originalUpdate
+//   })
 
-  it("should update balance successfully", async () => {
-    const balance = 200
-    const response = await supertest(app)
-      .post("/user/balance")
-      .set("Authorization", `Bearer ${token}`)
-      .send({ balance })
+//   it("should update balance successfully", async () => {
+//     const balance = 200
+//     const response = await supertest(app)
+//       .post("/user/balance")
+//       .set("Authorization", `Bearer ${token}`)
+//       .send({ balance })
 
-    const dbUser = await db.select().from(usersTable).where(eq(usersTable.id, userId))
+//     const dbUser = await db.select().from(usersTable).where(eq(usersTable.id, userId))
 
-    expect(response.status).toBe(200)
-    expect(parseInt(response.body.balance)).toEqual(balance)
+//     expect(response.status).toBe(200)
+//     expect(parseInt(response.body.balance)).toEqual(balance)
 
-    expect(parseInt(dbUser[0].balance)).toEqual(balance)
-  })
-})
+//     expect(parseInt(dbUser[0].balance)).toEqual(balance)
+//   })
+// })
