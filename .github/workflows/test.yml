@@ -68,7 +68,7 @@ jobs:
         run: xvfb-run --auto-servernum npm test
 
       # Clean up server
-      - name: Stop servers
+      - name: Stop server
         if: always()
         run: |
           if [ -f server.pid ]; then
