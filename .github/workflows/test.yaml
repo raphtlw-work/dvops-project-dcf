@@ -13,8 +13,8 @@ jobs:
       PORT: 3000
       DEBUG: true
       NODE_ENV: "development"
-      POSTGRES_CONNECTION_URL: "postgresql://postgres:test123@localhost:5432/postgres"
-      POSTGRES_PASSWORD: "QTadFsylIQlo"
+      POSTGRES_CONNECTION_URL: "postgresql://postgres:testing123@localhost:5432/postgres"
+      POSTGRES_PASSWORD: "testing123"
       JWT_SECRET: "test456"
 
     steps:
