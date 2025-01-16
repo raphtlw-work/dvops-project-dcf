@@ -14,6 +14,7 @@ jobs:
       DEBUG: true
       NODE_ENV: "development"
       POSTGRES_CONNECTION_URL: "postgresql://postgres:test123@localhost:5432/postgres"
+      POSTGRES_PASSWORD: "QTadFsylIQlo"
       JWT_SECRET: "test456"
 
     steps:
