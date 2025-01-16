@@ -26,7 +26,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
         
-      - name: Start Database
+      - name: Start Compose
         run: docker compose up -d --wait --wait-timeout 30
 
       - name: Push Database Schema

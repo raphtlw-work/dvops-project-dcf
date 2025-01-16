@@ -5,6 +5,8 @@ services:
     env_file:
       - path: .env
         required: false
+      - path: .env.testing
+        required: false
     ports:
       - 3000:${PORT}
     develop:
@@ -18,6 +20,8 @@ services:
     shm_size: 128mb
     env_file:
       - path: .env
+        required: false
+      - path: .env.testing
         required: false
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
