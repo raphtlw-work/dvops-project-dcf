@@ -1,15 +1,15 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "tsx watch --env-file .env index.ts",
-    "dev:docker": "docker compose up --watch",
-    "start": "tsx --env-file .env index.ts",
+    "dev:api": "tsx watch --env-file .env index.ts",
+    "dev:db": "docker compose up db",
     "format": "prettier . --write",
     "studio": "drizzle-kit studio",
-    "build": "node esbuild.cjs",
-    "test": "jest --config jest.config.ts",
+    "build": "tsup index.ts",
+    "start": "node dist/index.cjs",
     "test:api": "jest --runInBand --detectOpenHandles --forceExit test/ocean_dcf_backend.test.ts",
-    "test:ui": "jest  --runInBand --detectOpenHandles --forceExit test/ocean_dcf_frontend.test.ts"
+    "test:ui": "jest  --runInBand --detectOpenHandles --forceExit test/ocean_dcf_frontend.test.ts",
+    "coverage": "nyc npm run test"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -46,6 +46,7 @@
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
+    "tsup": "^8.3.5",
     "typescript": "^5.7.2"
   }
 }
