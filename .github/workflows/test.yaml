@@ -39,10 +39,10 @@ jobs:
         run: npx drizzle-kit push
 
       - name: Run backend tests with Jest
-        run: npm test:api
+        run: npm run test:api
 
       - name: Run Puppeteer tests
-        run: npm test:ui
+        run: npm run test:ui
 
       # Stop Docker Compose services
       - name: Stop Docker Compose services
