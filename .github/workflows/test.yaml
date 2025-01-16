@@ -1,55 +1,48 @@
-name: Test Pipeline
+name: Test Frontend and Backend
 
 on:
   push:
   pull_request:
-    
+  workflow_dispatch:
+
 jobs:
   test:
+    name: Run Tests
     runs-on: ubuntu-latest
     env:
-      NODE_ENV: development
-      POSTGRES_PASSWORD: testing123
-      JWT_SECRET: testing123
       PORT: 3000
+      DEBUG: true
+      NODE_ENV: "development"
+      POSTGRES_CONNECTION_URL: "postgresql://postgres:test123@localhost:5432/postgres"
+      JWT_SECRET: "test456"
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: 'npm'
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
-        
-      - name: Start Compose
+
+      # Start Docker Compose services
+      - name: Start services with Docker Compose
         run: docker compose up -d --wait --wait-timeout 30
 
-      - name: Push Database Schema
-        run: npx drizzle-kit push
+      # Push database schema with drizzle-kit
+      - name: Setup database schema with drizzle-kit
+        run: npm drizzle-kit push
 
-      - name: Run Backend Tests
-        run: npm run test:api
+      - name: Run backend tests with Jest
+        run: npm test:api
 
-      - name: Run Frontend Tests
-        run: npm run test:ui
+      - name: Run Puppeteer tests
+        run: npm test:ui
 
-      - name: Stop Docker Services
-        if: always()
+      # Stop Docker Compose services
+      - name: Stop Docker Compose services
         run: docker compose down
-
-      - name: Stop Dev Server
-        if: always()
-        run: |
-          pkill -f "npm run dev"
-
-      - name: Upload Test Results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: jest-results
-          path: test-results/
