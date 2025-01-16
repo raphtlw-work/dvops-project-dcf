@@ -36,7 +36,7 @@ jobs:
 
       # Push database schema with drizzle-kit
       - name: Setup database schema with drizzle-kit
-        run: npm drizzle-kit push
+        run: npx drizzle-kit push
 
       - name: Run backend tests with Jest
         run: npm test:api
