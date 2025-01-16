@@ -8,9 +8,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      NODE_ENV: test
-      POSTGRES_PASSWORD: "QTadFsylIQlo"
-      JWT_SECRET: "yO6txk2UBKuclKQZ"
+      NODE_ENV: development
+      POSTGRES_PASSWORD: testing123
+      JWT_SECRET: testing123
       PORT: 3000
 
     steps:
@@ -25,12 +25,9 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-
-      - name: Start Dev Server
-        run: npm run dev & # Run in background
         
       - name: Start Database
-        run: docker compose up db -d --wait --wait-timeout 30
+        run: docker compose up -d --wait --wait-timeout 30
 
       - name: Push Database Schema
         run: npx drizzle-kit push
