@@ -6,7 +6,7 @@ describe("Coin Decider Frontend Tests", () => {
 
   beforeAll(async () => {
     browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       defaultViewport: null,
       slowMo: 200,
     })
