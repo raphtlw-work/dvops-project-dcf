@@ -13,6 +13,7 @@ jobs:
       PORT: 3000
       DEBUG: true
       NODE_ENV: "development"
+      POSTGRES_PASSWORD: "test123"
       POSTGRES_CONNECTION_URL: "postgresql://postgres:test123@localhost:5432/postgres"
       JWT_SECRET: "test456"
 
@@ -34,6 +35,16 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      # Write environment variables to .env file
+      - name: Write environment variables to .env file
+        run: |
+          echo "PORT=${{ env.PORT }}" > .env
+          echo "DEBUG=${{ env.DEBUG }}" >> .env
+          echo "NODE_ENV=${{ env.NODE_ENV }}" >> .env
+          echo "POSTGRES_PASSWORD=${{ env.POSTGRES_PASSWORD }}" >> .env
+          echo "POSTGRES_CONNECTION_URL=${{ env.POSTGRES_CONNECTION_URL }}" >> .env
+          echo "JWT_SECRET=${{ env.JWT_SECRET }}" >> .env
 
       # Start Docker Compose services
       - name: Start services with Docker Compose
