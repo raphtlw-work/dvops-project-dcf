@@ -22,7 +22,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@flydotio/dockerfile": "^0.6.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@tsconfig/node23": "^23.0.0",
     "@types/bcrypt": "^5.0.2",
