@@ -2,7 +2,11 @@ services:
   server:
     build: .
     restart: always
-    env_file: .env
+    env_file:
+      - path: .env
+        required: false
+      - path: stack.env
+        required: false
     ports:
       - 3000:${PORT}
     develop:
@@ -14,7 +18,11 @@ services:
     image: postgres
     restart: always
     shm_size: 128mb
-    env_file: .env
+    env_file:
+      - path: .env
+        required: false
+      - path: stack.env
+        required: false
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
