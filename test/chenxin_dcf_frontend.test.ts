@@ -1,5 +1,9 @@
 import 'dotenv/config';
 import puppeteer, { Browser, Page } from 'puppeteer';
+import supertest from 'supertest';
+import { db } from '../util/db';
+import { usersTable } from '../schema/db';
+import { eq } from 'drizzle-orm';
 
 function wait(milliseconds: number) {
   return new Promise(resolve => setTimeout(resolve, milliseconds));
@@ -44,10 +48,26 @@ describe('Profile Page Tests', () => {
   test('should navigate to the profile page and edit the profile', async () => {
     const profileUrl = 'http://localhost:3000/#profile';
 
+    const dummyUser = { email: `dummyuser@gmail.com`, password: "dummyPassword", username: "dummy" }
+
+    // Create a dummy account
+    const registerResponse = await supertest("http://localhost:3000").post('/auth/register').send(dummyUser)
+
+    console.log(registerResponse.body)
+
+    // Login to get the access token
+    const loginResponse = await supertest("http://localhost:3000")
+      .post("/auth/login")
+      .send({ email: dummyUser.email, password: dummyUser.password })
+
+    console.log(loginResponse.body)
+
+    const token = loginResponse.body.token
+
     // Set token before navigation
-    await page.evaluateOnNewDocument(() => {
-      localStorage.setItem('authToken', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InNuYWNrQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoic25hY2siLCJiYWxhbmNlIjoiMC4wMCJ9LCJpYXQiOjE3MzMzMzU4NjMsImV4cCI6MTczMzU5NTA2M30.YOUR_VALID_SIGNATURE");
-    });
+    await page.evaluateOnNewDocument((token) => {
+      localStorage.setItem('authToken', token);
+    }, token);
 
     await page.goto(profileUrl);
 
@@ -65,6 +85,10 @@ describe('Profile Page Tests', () => {
       await dialog.accept(); // This will click OK on any alert
     });
 
+    await page.evaluate((token) => {
+      localStorage.setItem('authToken', token);
+    }, token)
+
     // Wait for input fields
     await page.waitForSelector('#edit-username');
     await page.waitForSelector('#edit-email');
@@ -73,20 +97,30 @@ describe('Profile Page Tests', () => {
     await page.$eval('#edit-username', el => (el as HTMLInputElement).value = '');
     await page.$eval('#edit-email', el => (el as HTMLInputElement).value = '');
 
+    await page.evaluate((token) => {
+      localStorage.setItem('authToken', token);
+    }, token)
+
     // Type new values
     await page.type('#edit-username', 'updateduser', { delay: 10 });
     await page.type('#edit-email', 'updateduser@example.com', { delay: 10 });
 
+    await page.evaluate((token) => {
+      localStorage.setItem('authToken', token);
+    }, token)
+
     // Click save and wait for update
     await page.click('#view-profile button');
-    
+
     await wait(2000);
 
     // Verify updates
     const updatedUsername = await page.$eval('#profile-username', el => el.textContent);
     const updatedEmail = await page.$eval('#profile-email', el => el.textContent);
-    
+
     expect(updatedUsername).toBe('updateduser');
     expect(updatedEmail).toBe('updateduser@example.com');
+
+    await db.delete(usersTable).where(eq(usersTable.email, dummyUser.email))
   }, 50 * 1000);
 });
