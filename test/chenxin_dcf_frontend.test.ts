@@ -22,7 +22,7 @@ describe('Profile Page Tests', () => {
     }
 
     browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       defaultViewport: null,
       executablePath: process.env.BROWSER_PATH,
       args: [
