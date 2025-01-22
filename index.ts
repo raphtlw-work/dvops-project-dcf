@@ -1,6 +1,8 @@
+import { logger } from "@/util/logger"
 import bcrypt from "bcrypt"
 import { eq } from "drizzle-orm"
 import express from "express"
+import statusMonitor from "express-status-monitor"
 import jwt from "jsonwebtoken"
 import { usersTable } from "./schema/db"
 import { authLoginInput, authRegisterInput } from "./schema/routes"
@@ -14,6 +16,8 @@ const app = express()
 
 app.use(express.static("public"))
 app.use(express.json())
+
+app.use(statusMonitor())
 
 app.get("/", (req, res) => {
   res.send("Hello, World")
@@ -110,4 +114,7 @@ app.use(chenxinRouter)
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`)
+
+  logger.info(`Demo project at: http://localhost:3000!`)
+  logger.error(`Example or error log`)
 })
