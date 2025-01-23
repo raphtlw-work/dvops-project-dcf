@@ -16,4 +16,17 @@ spec: # defines the desired state of the Deployment.
       - name: rms-container
         image: oceantp/dvops-project-dcf:latest
         ports:
-        - containerPort: 5050 # specifies the port that the application listens on
+        - containerPort: 3000 # specifies the port that the application listens on
+        env:
+        - name: PORT
+          value: "3000"
+        - name: DEBUG
+          value: "true"
+        - name: NODE_ENV
+          value: "development"
+        - name: POSTGRES_PASSWORD
+          value: "QTadFsylIQlo"
+        - name: POSTGRES_CONNECTION_URL
+          value: "postgres://postgres:QTadFsylIQlo@localhost:5432/postgres"
+        - name: JWT_SECRET
+          value: "yO6txk2UBKuclKQZ"

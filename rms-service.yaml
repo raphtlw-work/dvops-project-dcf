@@ -8,5 +8,18 @@ spec: # defines the desired state of the Service
   ports: # defines how the service should handle incoming traffic and which ports to expose
     - protocol: TCP # standard protocol for most web applications
       port: 80  # exposes port 80, which is the default HTTP port
-      targetPort: 5050 # specifies the port that the application listens on
+      targetPort: 3000 # specifies the port that the application listens on
   type: LoadBalancer  # expose externally using a public IP
+  env:
+    - name: PORT
+      value: "3000"
+    - name: DEBUG
+      value: "true"
+    - name: NODE_ENV
+      value: "development"
+    - name: POSTGRES_PASSWORD
+      value: "QTadFsylIQlo"
+    - name: POSTGRES_CONNECTION_URL
+      value: "postgres://postgres:QTadFsylIQlo@localhost:5432/postgres"
+    - name: JWT_SECRET
+      value: "yO6txk2UBKuclKQZ"
