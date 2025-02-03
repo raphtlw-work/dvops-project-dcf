@@ -40,7 +40,7 @@
     "chai-http": "^5.1.1",
     "cypress": "^13.16.1",
     "cypress-ctrf-json-reporter": "^0.0.11",
-    "drizzle-kit": "^0.26.2",
+    "drizzle-kit": "^0.30.4",
     "github-actions-ctrf": "^0.0.57",
     "mocha": "^11.0.1",
     "mocha-ctrf-json-reporter": "^0.0.6",

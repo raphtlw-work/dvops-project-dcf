@@ -88,8 +88,8 @@ importers:
         specifier: ^0.0.11
         version: 0.0.11
       drizzle-kit:
-        specifier: ^0.26.2
-        version: 0.26.2
+        specifier: ^0.30.4
+        version: 0.30.4
       github-actions-ctrf:
         specifier: ^0.0.57
         version: 0.0.57
@@ -226,8 +226,8 @@ packages:
   '@dabh/diagnostics@2.0.3':
     resolution: {integrity: sha512-hrlQOIi7hAfzsMqlGSFyVucrx38O+j6wiGOf//H2ecvIEqYN4ADBSS2iLMh5UFyDunCNniUIPk/q3riFv45xRA==}
 
-  '@drizzle-team/brocli@0.10.1':
-    resolution: {integrity: sha512-AHy0vjc+n/4w/8Mif+w86qpppHuF3AyXbcWW+R/W7GNA3F5/p2nuhlkCJaTXSLZheB4l1rtHzOfr9A7NwoR/Zg==}
+  '@drizzle-team/brocli@0.10.2':
+    resolution: {integrity: sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w==}
 
   '@esbuild-kit/core-utils@3.3.2':
     resolution: {integrity: sha512-sPRAnw9CdSsRmEtnsl2WXWdyquogVpB3yZ3dgwJfe8zrOzTsV7cJvmwrKVa+0ma5BoiGJ+BoqkMvawbayKUsqQ==}
@@ -1776,8 +1776,8 @@ packages:
     resolution: {integrity: sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==}
     engines: {node: '>=12'}
 
-  drizzle-kit@0.26.2:
-    resolution: {integrity: sha512-cMq8omEKywjIy5KcqUo6LvEFxkl8/zYHsgYjFVXjmPWWtuW4blcz+YW9+oIhoaALgs2ebRjzXwsJgN9i6P49Dw==}
+  drizzle-kit@0.30.4:
+    resolution: {integrity: sha512-B2oJN5UkvwwNHscPWXDG5KqAixu7AUzZ3qbe++KU9SsQ+cZWR4DXEPYcvWplyFAno0dhRJECNEhNxiDmFaPGyQ==}
     hasBin: true
 
   drizzle-orm@0.35.3:
@@ -2177,6 +2177,9 @@ packages:
     resolution: {integrity: sha512-nBF+F1rAZVCu/p7rjzgA+Yb4lfYXrpl7a6VmJrU8wF9I1CKvP/QwPNZHnOlwbTkY6dvtFIzFMSyQXbLoTQPRpA==}
     engines: {node: '>=8'}
 
+  get-tsconfig@4.10.0:
+    resolution: {integrity: sha512-kGzZ3LWWQcGIAmg6iWvXn0ei6WDtV26wzHRMwDSzmAbcXrTEXxHy6IehI6/4eT6VRKyMP1eF1VqwrVUmE/LR7A==}
+
   get-tsconfig@4.8.1:
     resolution: {integrity: sha512-k9PN+cFBmaLWtVz29SkUoqU5O0slLuHJXt/2P+tMVFT+phsSGXGkp9t3rQIqdz0e+06EHNGs3oM6ZX1s2zHxRg==}
 
@@ -2550,6 +2553,7 @@ packages:
 
   lodash.get@4.4.2:
     resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
+    deprecated: This package is deprecated. Use the optional chaining (?.) operator instead.
 
   lodash.includes@4.3.0:
     resolution: {integrity: sha512-W3Bx6mdkRTGtlJISOvVD/lbqjTlPPUDTMnlXZFnVwi9NKJ6tiAk6LVdlhZMm17VZisqhKcgzpO5Wz91PCt5b0w==}
@@ -3890,7 +3894,7 @@ snapshots:
       enabled: 2.0.0
       kuler: 2.0.0
 
-  '@drizzle-team/brocli@0.10.1': {}
+  '@drizzle-team/brocli@0.10.2': {}
 
   '@esbuild-kit/core-utils@3.3.2':
     dependencies:
@@ -3900,7 +3904,7 @@ snapshots:
   '@esbuild-kit/esm-loader@2.6.5':
     dependencies:
       '@esbuild-kit/core-utils': 3.3.2
-      get-tsconfig: 4.8.1
+      get-tsconfig: 4.10.0
 
   '@esbuild/aix-ppc64@0.19.12':
     optional: true
@@ -5178,9 +5182,9 @@ snapshots:
 
   dotenv@16.4.5: {}
 
-  drizzle-kit@0.26.2:
+  drizzle-kit@0.30.4:
     dependencies:
-      '@drizzle-team/brocli': 0.10.1
+      '@drizzle-team/brocli': 0.10.2
       '@esbuild-kit/esm-loader': 2.6.5
       esbuild: 0.19.12
       esbuild-register: 3.6.0(esbuild@0.19.12)
@@ -5285,7 +5289,7 @@ snapshots:
 
   esbuild-register@3.6.0(esbuild@0.19.12):
     dependencies:
-      debug: 4.3.7(supports-color@8.1.1)
+      debug: 4.4.0(supports-color@8.1.1)
       esbuild: 0.19.12
     transitivePeerDependencies:
       - supports-color
@@ -5647,6 +5651,10 @@ snapshots:
   get-stream@5.2.0:
     dependencies:
       pump: 3.0.2
+
+  get-tsconfig@4.10.0:
+    dependencies:
+      resolve-pkg-maps: 1.0.0
 
   get-tsconfig@4.8.1:
     dependencies:
