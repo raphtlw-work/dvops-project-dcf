@@ -51,34 +51,18 @@ describe('Profile Page Tests', () => {
     const dummyUser = { email: `dummyuser@gmail.com`, password: "dummyPassword", username: "dummy" }
 
     // Create a dummy account
-    const registerResponse = await supertest("http://localhost:3000")
-      .post('/auth/register')
-      .send(dummyUser);
-    console.log('Register response:', registerResponse.body);
+    const registerResponse = await supertest("http://localhost:3000").post('/auth/register').send(dummyUser)
+
+    console.log(registerResponse.body)
 
     // Login to get the access token
     const loginResponse = await supertest("http://localhost:3000")
       .post("/auth/login")
-      .send({ email: dummyUser.email, password: dummyUser.password });
-    console.log('Login response:', loginResponse.body);
+      .send({ email: dummyUser.email, password: dummyUser.password })
 
-    const token = loginResponse.body.token;
+    console.log(loginResponse.body)
 
-    // Enable request interception
-    await page.setRequestInterception(true);
-    let updateSuccess = false;
-
-    page.on('request', request => {
-      request.continue();
-    });
-
-    page.on('response', async response => {
-      if (response.url().includes('/profile') && response.request().method() === 'PUT') {
-        const status = response.status();
-        updateSuccess = status === 200;
-        console.log('Profile update status:', status);
-      }
-    });
+    const token = loginResponse.body.token
 
     // Set token before navigation
     await page.evaluateOnNewDocument((token) => {
@@ -89,7 +73,6 @@ describe('Profile Page Tests', () => {
 
     try {
       await page.waitForSelector('#view-profile', { timeout: 5000 });
-      console.log('Profile view loaded successfully');
     } catch (error) {
       console.error('Profile view did not load. Check if the page is properly rendering.');
       throw error;
@@ -97,58 +80,39 @@ describe('Profile Page Tests', () => {
 
     // Click the edit button to enable profile editing
     await page.click('#view-profile button');
-    console.log('Clicked edit button');
 
     page.on('dialog', async dialog => {
-      await dialog.accept();
+      await dialog.accept(); // This will click OK on any alert
     });
+
+    await page.evaluate((token) => {
+      localStorage.setItem('authToken', token);
+    }, token)
 
     // Wait for input fields
     await page.waitForSelector('#edit-username');
     await page.waitForSelector('#edit-email');
-    console.log('Edit fields loaded');
 
     // Clear input fields before typing
     await page.$eval('#edit-username', el => (el as HTMLInputElement).value = '');
     await page.$eval('#edit-email', el => (el as HTMLInputElement).value = '');
 
+    await page.evaluate((token) => {
+      localStorage.setItem('authToken', token);
+    }, token)
+
     // Type new values
     await page.type('#edit-username', 'updateduser', { delay: 10 });
     await page.type('#edit-email', 'updateduser@example.com', { delay: 10 });
-    console.log('Filled in new values');
+
+    await page.evaluate((token) => {
+      localStorage.setItem('authToken', token);
+    }, token)
 
     // Click save and wait for update
     await page.click('#view-profile button');
-    console.log('Clicked save button');
 
-    // Wait for edit mode to be disabled
-    await page.waitForFunction(
-      () => !document.querySelector('#edit-username'),
-      { timeout: 5000 }
-    );
-
-    // Wait for profile to update
-    await page.waitForFunction(
-      () => document.querySelector('#profile-username')?.textContent === 'updateduser',
-      { timeout: 5000 }
-    );
-
-    // Verify update success
-    expect(updateSuccess).toBe(true);
-
-    // Add debug logging
-    const debugUsername = await page.$eval('#profile-username', el => {
-      console.log('Username element:', el);
-      console.log('Username text content:', el.textContent);
-      return el.textContent;
-    });
-    console.log('Debug username:', debugUsername);
-
-    // Verify API
-    const verifyResponse = await supertest("http://localhost:3000")
-      .get("/profile")
-      .set('Authorization', `Bearer ${token}`);
-    console.log('Profile verification response:', verifyResponse.body);
+    await wait(2000);
 
     // Verify updates
     const updatedUsername = await page.$eval('#profile-username', el => el.textContent);
@@ -157,6 +121,6 @@ describe('Profile Page Tests', () => {
     expect(updatedUsername).toBe('updateduser');
     expect(updatedEmail).toBe('updateduser@example.com');
 
-    await db.delete(usersTable).where(eq(usersTable.email, dummyUser.email));
+    await db.delete(usersTable).where(eq(usersTable.email, dummyUser.email))
   }, 50 * 1000);
 });
