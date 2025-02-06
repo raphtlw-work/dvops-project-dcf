@@ -115,11 +115,11 @@ describe('Profile Page Tests', () => {
     await wait(2000);
 
     // Verify updates
-    const newUsername = await page.$eval('#profile-username', el => el.textContent);
-    const newEmail = await page.$eval('#profile-email', el => el.textContent);
+    const updatedUsername = await page.$eval('#profile-username', el => el.textContent);
+    const updatedEmail = await page.$eval('#profile-email', el => el.textContent);
 
-    expect(newUsername).toBe('updateduser');
-    expect(newEmail).toBe('updateduser@example.com');
+    expect(updatedUsername).toBe('updateduser');
+    expect(updatedEmail).toBe('updateduser@example.com');
 
     await db.delete(usersTable).where(eq(usersTable.email, dummyUser.email))
   }, 50 * 1000);
