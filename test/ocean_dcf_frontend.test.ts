@@ -6,10 +6,13 @@ describe("Coin Decider Frontend Tests", () => {
 
   beforeAll(async () => {
     browser = await puppeteer.launch({
-      headless: false,
-      defaultViewport: null,
-      slowMo: 200,
-    })
+      headless: true,
+      args: [
+        `--no-sandbox`,
+        `--disable-setuid-sandbox`,
+      ],
+      slowMo: 50
+    });
     page = await browser.newPage()
   })
 
