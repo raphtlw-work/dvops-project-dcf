@@ -21,13 +21,13 @@ function fetchUserProfile(token) {
 }
 
 function editProfile() {
-  const usernameElement = document.getElementById("profile-username")
-  const emailElement = document.getElementById("profile-email")
+  const usernameElement = document.getElementById("edit-username")
+  const emailElement = document.getElementById("edit-email")
 
   const currentUsername = usernameElement.textContent
   const currentEmail = emailElement.textContent
 
-  usernameElement.innerHTML = `<input type="text" id="edit-username" value="updateduser" />`
+  usernameElement.innerHTML = `<input type="text" id="edit-username" value="${currentUsername}" />`
   emailElement.innerHTML = `<input type="email" id="edit-email" value="${currentEmail}" />`
 
   const editButton = document.querySelector("#view-profile button")
