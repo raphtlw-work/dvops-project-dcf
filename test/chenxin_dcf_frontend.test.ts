@@ -115,8 +115,8 @@ describe('Profile Page Tests', () => {
     await wait(2000);
 
     // Verify updates
-    const updatedUsername = await page.$eval('#profile-username', el => el.textContent);
-    const updatedEmail = await page.$eval('#profile-email', el => el.textContent);
+    const updatedUsername = await page.$eval('#edit-username', el => el.textContent);
+    const updatedEmail = await page.$eval('#edit-email', el => el.textContent);
 
     expect(updatedUsername).toBe('updateduser');
     expect(updatedEmail).toBe('updateduser@example.com');
