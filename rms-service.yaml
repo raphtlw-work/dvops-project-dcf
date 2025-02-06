@@ -1,26 +1,12 @@
-# apiVersion: v1
-# kind: Service
-# metadata: # metadata about the service
-#   name: rms-service
-# spec: # defines the desired state of the Service
-#   selector:
-#     app: rms-docker-img
-#   ports: # defines how the service should handle incoming traffic and which ports to expose
-#     - protocol: TCP # standard protocol for most web applications
-#       port: 80  # exposes port 80, which is the default HTTP port
-#       targetPort: 3000 # specifies the port that the application listens on
-#   type: LoadBalancer  # expose externally using a public IP
-
 apiVersion: v1
 kind: Service
-metadata:
+metadata: # metadata about the service
   name: rms-service
-spec:
+spec: # defines the desired state of the Service
   selector:
     app: rms-docker-img
-  ports:
-    - protocol: TCP  # Standard protocol for most web applications
-      port: 80       # Exposes port 80, the default HTTP port
-      targetPort: 3000  # Port that the application listens on
-  type: LoadBalancer  # Expose externally using a public IP
- 
+  ports: # defines how the service should handle incoming traffic and which ports to expose
+    - protocol: TCP # standard protocol for most web applications
+      port: 80  # exposes port 80, which is the default HTTP port
+      targetPort: 3000 # specifies the port that the application listens on
+  type: LoadBalancer  # expose externally using a public IP
