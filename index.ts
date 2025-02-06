@@ -15,9 +15,14 @@ const app = express()
 app.use(express.static("public"))
 app.use(express.json())
 
+import logger from './logger.ts'
+import statusMonitor from 'express-status-monitor'
+app.use(statusMonitor());
+
 app.get("/", (req, res) => {
   res.send("Hello, World")
 })
+
 
 if (process.env.NODE_ENV === "development") {
   let toReload = true
@@ -111,4 +116,6 @@ app.use(chenxinRouter)
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`)
-})
+  logger.info(`Project at: http://34.142.226.251/:${process.env.PORT}!`);
+logger.error(`Example or error log`)
+});
