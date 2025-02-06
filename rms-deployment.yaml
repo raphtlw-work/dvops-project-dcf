@@ -30,23 +30,3 @@ spec: # defines the desired state of the Deployment.
           value: "postgres://postgres:QTadFsylIQlo@rmsaksclus-devopsgroup-1b61aa-je5hk0rh.hcp.centralus.azmk8s.io:5432/postgres"
         - name: JWT_SECRET
           value: "yO6txk2UBKuclKQZ"
-
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: rms-deployment
-# spec:
-#   replicas: 2  # Specifies how many identical replicas (pods) should be maintained
-#   selector:
-#     matchLabels:
-#       app: rms-docker-img
-#   template:
-#     metadata:
-#       labels:
-#         app: rms-docker-img
-#     spec:
-#       containers:
-#       - name: rms-container
-#         image: oceantp/dvops-project-dcf:latest
-#         ports:
-#         - containerPort: 5050  # Port that the application listens on
