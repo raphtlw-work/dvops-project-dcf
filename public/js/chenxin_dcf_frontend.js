@@ -27,7 +27,7 @@ function editProfile() {
   const currentUsername = usernameElement.textContent
   const currentEmail = emailElement.textContent
 
-  usernameElement.innerHTML = `<input type="text" id="edit-username" value="${currentUsername}" />`
+  usernameElement.innerHTML = `<input type="text" id="edit-username" value="updateduser" />`
   emailElement.innerHTML = `<input type="email" id="edit-email" value="${currentEmail}" />`
 
   const editButton = document.querySelector("#view-profile button")
