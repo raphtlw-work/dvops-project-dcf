@@ -48,7 +48,7 @@
     "mocha": "^11.0.1",
     "mocha-ctrf-json-reporter": "^0.0.6",
     "nyc": "^17.1.0",
-    "prettier": "^3.3.3",
+    "prettier": "^3.5.0",
     "prettier-plugin-organize-imports": "^4.1.0",
     "puppeteer": "^23.10.0",
     "sinon": "^19.0.2",
