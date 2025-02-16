@@ -1,5 +1,5 @@
 // Assuming you already have express and db imported
-import { eq } from "drizzle-orm"
+import { eq } from "drizzle-orm/sql"
 import express from "express"
 import jwt from "jsonwebtoken"
 import { usersTable } from "../schema/db" // Your users table schema
@@ -56,7 +56,7 @@ oceanRouter.post("/user/balance", async (req, res) => {
     }
   } catch (e) {
     if (e instanceof jwt.JsonWebTokenError) {
-      res.status(401).json({error: "Invalid token"})
+      res.status(401).json({ error: "Invalid token" })
       return
     }
   }

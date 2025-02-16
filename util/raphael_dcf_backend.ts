@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm"
+import { eq } from "drizzle-orm/sql"
 import express from "express"
 import jwt from "jsonwebtoken"
 import { usersTable } from "../schema/db"
