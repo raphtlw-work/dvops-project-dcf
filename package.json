@@ -46,7 +46,7 @@
     "drizzle-kit": "^0.30.4",
     "github-actions-ctrf": "^0.0.58",
     "mocha": "^11.1.0",
-    "mocha-ctrf-json-reporter": "^0.0.6",
+    "mocha-ctrf-json-reporter": "^0.0.7",
     "nyc": "^17.1.0",
     "prettier": "^3.5.1",
     "prettier-plugin-organize-imports": "^4.1.0",
