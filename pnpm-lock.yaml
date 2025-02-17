@@ -106,8 +106,8 @@ importers:
         specifier: ^11.1.0
         version: 11.1.0
       mocha-ctrf-json-reporter:
-        specifier: ^0.0.6
-        version: 0.0.6
+        specifier: ^0.0.7
+        version: 0.0.7
       nyc:
         specifier: ^17.1.0
         version: 17.1.0
@@ -2972,8 +2972,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  mocha-ctrf-json-reporter@0.0.6:
-    resolution: {integrity: sha512-a5wBPTIYDfbSHKKYH6iM6Ut1PT2gpOoGe4tXB3SFYSou5QGUEcWHKBcHpnWGxVRUcYDMtNPU6n1127OHgS3qCA==}
+  mocha-ctrf-json-reporter@0.0.7:
+    resolution: {integrity: sha512-p9HlfHki8n/+GL0EczM/Lk8kvRDfXOkI/a3rSkWwn/yeNQSSgm/H5AKjexsInxc/QvYXwZB2SyHkcXj1XC0fuw==}
 
   mocha@11.1.0:
     resolution: {integrity: sha512-8uJR5RTC2NgpY3GrYcgpZrsEd9zKbPDpob1RezyR2upGHRQtHWofmzTMzTMSV6dru3tj5Ukt0+Vnq1qhFEEwAg==}
@@ -6729,7 +6729,7 @@ snapshots:
 
   mkdirp@1.0.4: {}
 
-  mocha-ctrf-json-reporter@0.0.6: {}
+  mocha-ctrf-json-reporter@0.0.7: {}
 
   mocha@11.1.0:
     dependencies:
